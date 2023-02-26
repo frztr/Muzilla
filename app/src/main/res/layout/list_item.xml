@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="9.09dp"
-        android:background="@drawable/backgradient"
+        android:background="@drawable/playlist_gradient"
         >
 
         <androidx.cardview.widget.CardView
