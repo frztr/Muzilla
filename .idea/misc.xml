@@ -9,17 +9,21 @@
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/corner1.xml" value="1.0" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/playergradient.xml" value="0.18162393162393162" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/playlist_gradient.xml" value="0.18162393162393162" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/track_back.xml" value="0.17692307692307693" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/track_back2.xml" value="0.2076923076923077" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/drawable/track_shadow.xml" value="0.17692307692307693" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/font/roboto.xml" value="0.2688034188034188" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/activity_main_page.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/content_main_page.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_first.xml" value="0.1683760683760684" />
-        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_main.xml" value="0.67" />
-        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_popular.xml" value="0.1683760683760684" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_main.xml" value="0.25" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_popular.xml" value="0.1" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_search.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_second.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/fragment_settings.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/list_item.xml" value="0.9" />
+        <entry key="..\:/Users/mrzak/AndroidStudioProjects/MuZilla/app/src/main/res/layout/list_item_track.xml" value="0.75" />
       </map>
     </option>
   </component>

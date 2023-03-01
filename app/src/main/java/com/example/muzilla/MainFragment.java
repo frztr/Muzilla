@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,11 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private int Owner_id;
+    public void setOwner_id(int owner_id)
+    {
+        this.Owner_id = owner_id;
+    }
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -72,12 +77,16 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) getView().findViewById(R.id.playlists_list);
-
         ArrayList<Playlist> playlists = new ArrayList<Playlist>();
-        playlists.add(new Playlist("https://sun1-15.userapi.com/impf/34Chu2xz1zo3Z-BupppQcaNFSzTTxbRuinZMGg/Zi9Wx3qRGAs.jpg?size=270x0&quality=90&sign=93249ada65d9448342de638ec7f4080a&c_uniq_tag=0EyV3CmIrUfB8mRsBjZj5UYlJr33IsIC0VSJDnRKmxE","Will Be Soon", "DVRST, 6YNTHMANE, ANTICXLTXRE"));
-        playlists.add(new Playlist("https://sun1-15.userapi.com/impf/34Chu2xz1zo3Z-BupppQcaNFSzTTxbRuinZMGg/Zi9Wx3qRGAs.jpg?size=270x0&quality=90&sign=93249ada65d9448342de638ec7f4080a&c_uniq_tag=0EyV3CmIrUfB8mRsBjZj5UYlJr33IsIC0VSJDnRKmxE","Will Be Soon", "DVRST, 6YNTHMANE, ANTICXLTXRE"));
-        playlists.add(new Playlist("https://sun1-15.userapi.com/impf/34Chu2xz1zo3Z-BupppQcaNFSzTTxbRuinZMGg/Zi9Wx3qRGAs.jpg?size=270x0&quality=90&sign=93249ada65d9448342de638ec7f4080a&c_uniq_tag=0EyV3CmIrUfB8mRsBjZj5UYlJr33IsIC0VSJDnRKmxE","Will Be Soon", "DVRST, 6YNTHMANE, ANTICXLTXRE"));
         PlaylistAdapter adapter = new PlaylistAdapter(this.getContext(),playlists);
         rv.setAdapter(adapter);
+        ((MainActivity)getActivity()).API.getMyPlaylists(playlists,adapter,Owner_id);
+
+        RecyclerView rv2 = (RecyclerView) getView().findViewById(R.id.tracks_list_main);
+        ArrayList<Track> tracks = new ArrayList<Track>();
+        TrackAdapter adapter2 = new TrackAdapter(this.getContext(),tracks);
+        rv2.setAdapter(adapter2);
+        ((MainActivity)getActivity()).API.getMyAudio(tracks,adapter2);
+
     }
 }

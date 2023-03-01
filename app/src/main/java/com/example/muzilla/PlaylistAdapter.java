@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class PlaylistAdapter extends RecyclerView.Adapter {
@@ -32,8 +34,14 @@ public class PlaylistAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Playlist playlist = playlists.get(position);
         PlaylistAdapter.ViewHolder viewHolder = (PlaylistAdapter.ViewHolder) holder;
-        //viewHolder.flagView.setImageURI(Uri.parse(playlist.getImgUrl()));
-        viewHolder.flagView.setImageResource(R.drawable.track1);
+        if(playlist.getImgUrl()!="")
+        {
+            Picasso.get().load(playlist.getImgUrl()).into(viewHolder.flagView);
+        }
+        else
+        {
+            Picasso.get().load(R.drawable.music_icon).into(viewHolder.flagView);
+        }
         viewHolder.nameView.setText(playlist.getName());
         viewHolder.musicianView.setText(playlist.getMusician());
     }

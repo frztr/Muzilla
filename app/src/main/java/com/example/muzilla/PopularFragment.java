@@ -2,11 +2,16 @@ package com.example.muzilla;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +63,16 @@ public class PopularFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_popular, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_popular);
+        ArrayList<Track> tracks = new ArrayList<Track>();
+        TrackAdapter adapter = new TrackAdapter(this.getContext(),tracks);
+        rv.setAdapter(adapter);
+        ((MainActivity)getActivity()).API.getPopularAudio(tracks,adapter);
+
     }
 }

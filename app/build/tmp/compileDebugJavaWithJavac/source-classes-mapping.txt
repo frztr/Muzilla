@@ -1,0 +1,44 @@
+com/example/muzilla/BuildConfig.java
+ com.example.muzilla.BuildConfig
+com/example/muzilla/databinding/FragmentSettingsBinding.java
+ com.example.muzilla.databinding.FragmentSettingsBinding
+com/example/muzilla/databinding/FragmentMainBinding.java
+ com.example.muzilla.databinding.FragmentMainBinding
+com/example/muzilla/HttpQuery.java
+ com.example.muzilla.HttpQuery
+com/example/muzilla/databinding/ListItemTrackBinding.java
+ com.example.muzilla.databinding.ListItemTrackBinding
+com/example/muzilla/LoadImage.java
+ com.example.muzilla.LoadImage
+com/example/muzilla/databinding/FragmentSearchBinding.java
+ com.example.muzilla.databinding.FragmentSearchBinding
+com/example/muzilla/databinding/ActivityMainBinding.java
+ com.example.muzilla.databinding.ActivityMainBinding
+com/example/muzilla/Track.java
+ com.example.muzilla.Track
+com/example/muzilla/TrackAdapter.java
+ com.example.muzilla.TrackAdapter
+ com.example.muzilla.TrackAdapter$ViewHolder
+com/example/muzilla/Playlist.java
+ com.example.muzilla.Playlist
+com/example/muzilla/SettingsFragment.java
+ com.example.muzilla.SettingsFragment
+com/example/muzilla/SearchFragment.java
+ com.example.muzilla.SearchFragment
+com/example/muzilla/AsyncTaskBody.java
+ com.example.muzilla.AsyncTaskBody
+com/example/muzilla/databinding/ListItemBinding.java
+ com.example.muzilla.databinding.ListItemBinding
+com/example/muzilla/databinding/FragmentPopularBinding.java
+ com.example.muzilla.databinding.FragmentPopularBinding
+com/example/muzilla/PlaylistAdapter.java
+ com.example.muzilla.PlaylistAdapter
+ com.example.muzilla.PlaylistAdapter$ViewHolder
+com/example/muzilla/API.java
+ com.example.muzilla.API
+com/example/muzilla/PopularFragment.java
+ com.example.muzilla.PopularFragment
+com/example/muzilla/MainActivity.java
+ com.example.muzilla.MainActivity
+com/example/muzilla/MainFragment.java
+ com.example.muzilla.MainFragment
