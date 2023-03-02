@@ -1,12 +1,24 @@
 package com.example.muzilla;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +72,32 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        EditText edt = (EditText) getView().findViewById(R.id.search_input);
+        edt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent)
+            {
+                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER)
+                {
+                    EditText editText = (EditText) view;
+                    ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(editText.getWindowToken(),0);
+                    RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_search);
+                    ArrayList<Track> tracks = new ArrayList<Track>();
+                    TrackAdapter adapter = new TrackAdapter(getView().getContext(),tracks);
+                    rv.setAdapter(adapter);
+                    ((MainActivity)getActivity()).API.searchAudio(tracks,adapter,editText.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
     }
 }

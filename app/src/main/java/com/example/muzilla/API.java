@@ -240,6 +240,48 @@ public class API
         HttpQuery httpQuery = new HttpQuery(atb);
         httpQuery.execute("https://api.vk.com/method/audio.getPlaylists?access_token="+Token+"&v=5.131&owner_id="+owner_id+"&extended=1&count=20");
     }
+
+    public void searchAudio(ArrayList<Track> tracks, RecyclerView.Adapter adapter,String query)
+    {
+        AsyncTaskBody atb = new AsyncTaskBody();
+        atb.onSuccessExecute(()->
+        {
+
+            JSONObject response = null;
+            try {
+                response = new JSONObject(atb.Response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JSONArray tracklist = null;
+            try {
+                tracklist = response.getJSONObject("response").getJSONArray("items");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0;i<tracklist.length();i++)
+            {
+                try {
+                    String track = "";
+                    if(tracklist.getJSONObject(i).has("album"))
+                    {
+                        track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                    }
+                    Log.e("Console", track+","+tracklist.getJSONObject(i).get("title").toString()+","+ tracklist.getJSONObject(i).get("duration"));
+                    tracks.add(new Track(track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration"))));
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        });
+        HttpQuery httpQuery = new HttpQuery(atb);
+        httpQuery.execute("https://api.vk.com/method/audio.search?access_token="+Token+"&v=5.131&q="+query);
+    }
 }
 
 

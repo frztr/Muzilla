@@ -4,25 +4,43 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.muzilla.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentSearchBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final ConstraintLayout rootView;
 
-  private FragmentSearchBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final EditText searchInput;
+
+  @NonNull
+  public final CardView searchInputLayout;
+
+  @NonNull
+  public final RecyclerView tracksListSearch;
+
+  private FragmentSearchBinding(@NonNull ConstraintLayout rootView, @NonNull EditText searchInput,
+      @NonNull CardView searchInputLayout, @NonNull RecyclerView tracksListSearch) {
     this.rootView = rootView;
+    this.searchInput = searchInput;
+    this.searchInputLayout = searchInputLayout;
+    this.tracksListSearch = tracksListSearch;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +61,32 @@ public final class FragmentSearchBinding implements ViewBinding {
 
   @NonNull
   public static FragmentSearchBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.search_input;
+      EditText searchInput = ViewBindings.findChildViewById(rootView, id);
+      if (searchInput == null) {
+        break missingId;
+      }
 
-    return new FragmentSearchBinding((FrameLayout) rootView);
+      id = R.id.search_input_layout;
+      CardView searchInputLayout = ViewBindings.findChildViewById(rootView, id);
+      if (searchInputLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.tracks_list_search;
+      RecyclerView tracksListSearch = ViewBindings.findChildViewById(rootView, id);
+      if (tracksListSearch == null) {
+        break missingId;
+      }
+
+      return new FragmentSearchBinding((ConstraintLayout) rootView, searchInput, searchInputLayout,
+          tracksListSearch);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

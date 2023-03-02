@@ -4,25 +4,43 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.EditText;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.muzilla.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final ConstraintLayout rootView;
 
-  private FragmentSettingsBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final EditText accessTokenInput;
+
+  @NonNull
+  public final TextView labelToken;
+
+  @NonNull
+  public final TextView settingstitle;
+
+  private FragmentSettingsBinding(@NonNull ConstraintLayout rootView,
+      @NonNull EditText accessTokenInput, @NonNull TextView labelToken,
+      @NonNull TextView settingstitle) {
     this.rootView = rootView;
+    this.accessTokenInput = accessTokenInput;
+    this.labelToken = labelToken;
+    this.settingstitle = settingstitle;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +61,32 @@ public final class FragmentSettingsBinding implements ViewBinding {
 
   @NonNull
   public static FragmentSettingsBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.access_token_input;
+      EditText accessTokenInput = ViewBindings.findChildViewById(rootView, id);
+      if (accessTokenInput == null) {
+        break missingId;
+      }
 
-    return new FragmentSettingsBinding((FrameLayout) rootView);
+      id = R.id.label_token;
+      TextView labelToken = ViewBindings.findChildViewById(rootView, id);
+      if (labelToken == null) {
+        break missingId;
+      }
+
+      id = R.id.settingstitle;
+      TextView settingstitle = ViewBindings.findChildViewById(rootView, id);
+      if (settingstitle == null) {
+        break missingId;
+      }
+
+      return new FragmentSettingsBinding((ConstraintLayout) rootView, accessTokenInput, labelToken,
+          settingstitle);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

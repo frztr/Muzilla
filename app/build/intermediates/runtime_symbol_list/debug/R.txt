@@ -1916,6 +1916,7 @@ int id SecondFragment 0x7f09000d
 int id TOP_END 0x7f09000e
 int id TOP_START 0x7f09000f
 int id accelerate 0x7f090010
+int id access_token_input 0x7f090201
 int id accessibility_action_clickable_span 0x7f090011
 int id accessibility_custom_action_0 0x7f090012
 int id accessibility_custom_action_1 0x7f090013
@@ -2142,6 +2143,7 @@ int id item4 0x7f0900ef
 int id item_touch_helper_previous_elevation 0x7f0900f0
 int id jumpToEnd 0x7f0900f1
 int id jumpToStart 0x7f0900f2
+int id label_token 0x7f0901ff
 int id labeled 0x7f0900f3
 int id layout 0x7f0900f4
 int id left 0x7f0900f5
@@ -2284,6 +2286,8 @@ int id search_button 0x7f09017c
 int id search_close_btn 0x7f09017d
 int id search_edit_frame 0x7f09017e
 int id search_go_btn 0x7f09017f
+int id search_input 0x7f090202
+int id search_input_layout 0x7f090203
 int id search_mag_icon 0x7f090180
 int id search_plate 0x7f090181
 int id search_src_text 0x7f090182
@@ -2291,6 +2295,7 @@ int id search_voice_btn 0x7f090183
 int id select_dialog_listview 0x7f090184
 int id selected 0x7f090185
 int id selection_type 0x7f090186
+int id settingstitle 0x7f090200
 int id sharedValueSet 0x7f090187
 int id sharedValueUnset 0x7f090188
 int id shortcut 0x7f090189
@@ -2380,6 +2385,7 @@ int id track_musician 0x7f0901dc
 int id track_name 0x7f0901dd
 int id tracks_list_main 0x7f0901de
 int id tracks_list_popular 0x7f0901fe
+int id tracks_list_search 0x7f090204
 int id transitionToEnd 0x7f0901df
 int id transitionToStart 0x7f0901e0
 int id transition_current_scene 0x7f0901e1

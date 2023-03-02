@@ -72,6 +72,7 @@ public class HttpQuery extends AsyncTask<String,Void,String> {
     }
 
     protected void onPostExecute(String result) {
+
         atb.Response = result;
         atb.onSuccessExecute.run();
     }

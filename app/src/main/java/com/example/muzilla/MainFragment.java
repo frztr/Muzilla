@@ -1,5 +1,6 @@
 package com.example.muzilla;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,16 +21,16 @@ import java.util.ArrayList;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements IBaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private int Owner_id;
-    public void setOwner_id(int owner_id)
+    private SharedPreferences sp;
+    public void setSharedPreferences(SharedPreferences sp)
     {
-        this.Owner_id = owner_id;
+        this.sp = sp;
     }
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,7 +81,7 @@ public class MainFragment extends Fragment {
         ArrayList<Playlist> playlists = new ArrayList<Playlist>();
         PlaylistAdapter adapter = new PlaylistAdapter(this.getContext(),playlists);
         rv.setAdapter(adapter);
-        ((MainActivity)getActivity()).API.getMyPlaylists(playlists,adapter,Owner_id);
+        ((MainActivity)getActivity()).API.getMyPlaylists(playlists,adapter,Integer.parseInt(sp.getString("profileId","")));
 
         RecyclerView rv2 = (RecyclerView) getView().findViewById(R.id.tracks_list_main);
         ArrayList<Track> tracks = new ArrayList<Track>();
