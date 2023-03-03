@@ -24,7 +24,15 @@
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\fragment_settings.xml"
     },
     {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_recommendation.xml",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\fragment_recommendation.xml"
+    },
+    {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_popular.xml",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\fragment_popular.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_popular_and_recommendations.xml",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\fragment_popular_and_recommendations.xml"
     }
 ]

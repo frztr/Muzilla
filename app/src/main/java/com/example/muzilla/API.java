@@ -269,7 +269,6 @@ public class API
                     {
                         track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
                     }
-                    Log.e("Console", track+","+tracklist.getJSONObject(i).get("title").toString()+","+ tracklist.getJSONObject(i).get("duration"));
                     tracks.add(new Track(track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration"))));
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {

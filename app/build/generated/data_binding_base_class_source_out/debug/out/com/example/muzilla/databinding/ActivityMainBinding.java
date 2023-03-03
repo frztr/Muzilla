@@ -4,7 +4,6 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import androidx.viewpager2.widget.ViewPager2;
 import com.example.muzilla.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -60,7 +60,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final LinearLayout linearLayout2;
 
   @NonNull
-  public final FrameLayout pageloader;
+  public final ViewPager2 pageloader;
 
   @NonNull
   public final TextView textView;
@@ -74,7 +74,7 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull ImageButton imageButton5, @NonNull ImageButton imageButton6,
       @NonNull ImageButton imageButton7, @NonNull ImageButton imageButton8,
       @NonNull ImageView imageView2, @NonNull LinearLayout linearLayout,
-      @NonNull LinearLayout linearLayout2, @NonNull FrameLayout pageloader,
+      @NonNull LinearLayout linearLayout2, @NonNull ViewPager2 pageloader,
       @NonNull TextView textView, @NonNull TextView textView2) {
     this.rootView = rootView;
     this.cl1 = cl1;
@@ -190,7 +190,7 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       id = R.id.pageloader;
-      FrameLayout pageloader = ViewBindings.findChildViewById(rootView, id);
+      ViewPager2 pageloader = ViewBindings.findChildViewById(rootView, id);
       if (pageloader == null) {
         break missingId;
       }
