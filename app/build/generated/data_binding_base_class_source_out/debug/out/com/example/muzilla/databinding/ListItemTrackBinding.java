@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.muzilla.R;
@@ -24,6 +25,12 @@ public final class ListItemTrackBinding implements ViewBinding {
   public final TextView durationTrack;
 
   @NonNull
+  public final CardView trackItem;
+
+  @NonNull
+  public final ConstraintLayout trackItemWall;
+
+  @NonNull
   public final ImageView trackLogo;
 
   @NonNull
@@ -33,9 +40,12 @@ public final class ListItemTrackBinding implements ViewBinding {
   public final TextView trackName;
 
   private ListItemTrackBinding(@NonNull CardView rootView, @NonNull TextView durationTrack,
+      @NonNull CardView trackItem, @NonNull ConstraintLayout trackItemWall,
       @NonNull ImageView trackLogo, @NonNull TextView trackMusician, @NonNull TextView trackName) {
     this.rootView = rootView;
     this.durationTrack = durationTrack;
+    this.trackItem = trackItem;
+    this.trackItemWall = trackItemWall;
     this.trackLogo = trackLogo;
     this.trackMusician = trackMusician;
     this.trackName = trackName;
@@ -74,6 +84,14 @@ public final class ListItemTrackBinding implements ViewBinding {
         break missingId;
       }
 
+      CardView trackItem = (CardView) rootView;
+
+      id = R.id.track_item_wall;
+      ConstraintLayout trackItemWall = ViewBindings.findChildViewById(rootView, id);
+      if (trackItemWall == null) {
+        break missingId;
+      }
+
       id = R.id.track_logo;
       ImageView trackLogo = ViewBindings.findChildViewById(rootView, id);
       if (trackLogo == null) {
@@ -92,8 +110,8 @@ public final class ListItemTrackBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ListItemTrackBinding((CardView) rootView, durationTrack, trackLogo, trackMusician,
-          trackName);
+      return new ListItemTrackBinding((CardView) rootView, durationTrack, trackItem, trackItemWall,
+          trackLogo, trackMusician, trackName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

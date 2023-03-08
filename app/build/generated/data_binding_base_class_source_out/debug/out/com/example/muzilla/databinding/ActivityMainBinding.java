@@ -27,7 +27,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ConstraintLayout cl1;
 
   @NonNull
-  public final ConstraintLayout constraintLayout;
+  public final ImageView constraintLayout;
 
   @NonNull
   public final ImageButton imageButton;
@@ -69,7 +69,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView textView2;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull ConstraintLayout cl1,
-      @NonNull ConstraintLayout constraintLayout, @NonNull ImageButton imageButton,
+      @NonNull ImageView constraintLayout, @NonNull ImageButton imageButton,
       @NonNull ImageButton imageButton2, @NonNull ImageButton imageButton3,
       @NonNull ImageButton imageButton5, @NonNull ImageButton imageButton6,
       @NonNull ImageButton imageButton7, @NonNull ImageButton imageButton8,
@@ -124,7 +124,7 @@ public final class ActivityMainBinding implements ViewBinding {
       ConstraintLayout cl1 = (ConstraintLayout) rootView;
 
       id = R.id.constraintLayout;
-      ConstraintLayout constraintLayout = ViewBindings.findChildViewById(rootView, id);
+      ImageView constraintLayout = ViewBindings.findChildViewById(rootView, id);
       if (constraintLayout == null) {
         break missingId;
       }

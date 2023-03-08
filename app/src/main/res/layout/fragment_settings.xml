@@ -36,6 +36,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_bold"></TextView>
     <androidx.cardview.widget.CardView
+        android:id="@+id/access_token_input_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="29dp"
@@ -63,5 +64,38 @@
         android:singleLine="true"
         >
     </EditText>
+
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/label_choose_wall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Фоновое изображение"
+        android:textColor="@color/white"
+        android:textSize="14.5dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/access_token_input_card"
+        tools:layout_editor_absoluteX="0dp"></TextView>
+
+    <Button
+        android:id="@+id/choose_wall_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_back"
+        android:layout_marginLeft="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="5dp"
+        android:paddingTop="13.1dp"
+        android:paddingBottom="13.1dp"
+        android:paddingLeft="30.1dp"
+        android:paddingRight="30.1dp"
+        android:text="Выбрать фон"
+        android:textSize="14dp"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_choose_wall"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

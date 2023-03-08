@@ -11,83 +11,92 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MainFragment extends Fragment implements IBaseFragment {
+public class MainFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private SharedPreferences sp;
-    public void setSharedPreferences(SharedPreferences sp)
-    {
-        this.sp = sp;
-    }
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    PlaylistAdapter adapter;
+    ArrayListExtended<Playlist> playlists;
+    TrackAdapter adapter2;
+    ArrayListExtended<Track> tracks;
+    private API api;
+    private Integer profileId;
+    public MainFragment(API api, Integer profileId) {
+        this.api = api;
+        this.profileId = profileId;
+        tracks = new ArrayListExtended<Track>();
+        playlists = new ArrayListExtended<Playlist>();
 
-    public MainFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+
+        api.getMyPlaylists(playlists,this.profileId,0);
+        api.getMyAudio(tracks,0);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        adapter = new PlaylistAdapter(this.getContext(),playlists.arrayList);
+        adapter2 = new TrackAdapter(this.getContext(),tracks.arrayList);
+
+        playlists.addListener(()->{
+            adapter.notifyDataSetChanged();
+        });
+        tracks.addListener(()->
+        {
+            adapter2.notifyDataSetChanged();
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         RecyclerView rv = (RecyclerView) getView().findViewById(R.id.playlists_list);
-        ArrayList<Playlist> playlists = new ArrayList<Playlist>();
-        PlaylistAdapter adapter = new PlaylistAdapter(this.getContext(),playlists);
         rv.setAdapter(adapter);
-        ((MainActivity)getActivity()).API.getMyPlaylists(playlists,adapter,Integer.parseInt(sp.getString("profileId","")));
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(rv.canScrollHorizontally(1)==false)
+                {
+                    api.getMyPlaylists(playlists,profileId,rv.getAdapter().getItemCount());
+                }
+            }
+        });
 
         RecyclerView rv2 = (RecyclerView) getView().findViewById(R.id.tracks_list_main);
-        ArrayList<Track> tracks = new ArrayList<Track>();
-        TrackAdapter adapter2 = new TrackAdapter(this.getContext(),tracks);
         rv2.setAdapter(adapter2);
-        ((MainActivity)getActivity()).API.getMyAudio(tracks,adapter2);
+        rv2.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(rv2.canScrollVertically(1)==false)
+                {
+                    api.getMyAudio(tracks,rv2.getAdapter().getItemCount());
+                }
+            }
+        });
+
+        tracks.addListener(()->
+        {
+
+          //  ((MainActivity)getActivity()).AudioPlayer.setPlaylist(tracks.arrayList);
+          //  ((MainActivity)getActivity()).AudioPlayer.Play(0);
+        });
+
 
     }
 }

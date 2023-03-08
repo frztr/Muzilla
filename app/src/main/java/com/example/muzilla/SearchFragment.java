@@ -20,51 +20,21 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private API api;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SearchFragment() {
-        // Required empty public constructor
+    public SearchFragment(API api) {
+        this.api = api;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -87,17 +57,28 @@ public class SearchFragment extends Fragment {
                     EditText editText = (EditText) view;
                     ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(editText.getWindowToken(),0);
                     RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_search);
-                    ArrayList<Track> tracks = new ArrayList<Track>();
-                    TrackAdapter adapter = new TrackAdapter(getView().getContext(),tracks);
+                    ArrayListExtended<Track> tracks = new ArrayListExtended<Track>();
+                    TrackAdapter adapter = new TrackAdapter(getView().getContext(),tracks.arrayList);
+                    tracks.addListener(()->
+                    {
+                        adapter.notifyDataSetChanged();
+                    });
                     rv.setAdapter(adapter);
-                    ((MainActivity)getActivity()).API.searchAudio(tracks,adapter,editText.getText().toString());
+                    api.searchAudio(tracks,editText.getText().toString(),0);
+                    rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                            super.onScrollStateChanged(recyclerView, newState);
+                            if(rv.canScrollVertically(1)==false)
+                            {
+                                api.searchAudio(tracks,editText.getText().toString(),rv.getAdapter().getItemCount());
+                            }
+                        }
+                    });
                     return true;
                 }
                 return false;
             }
         });
-
-
-
     }
 }

@@ -64,6 +64,10 @@
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_cog.xml"
     },
     {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_pause__1_.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_pause__1_.xml"
+    },
+    {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
@@ -166,6 +170,10 @@
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_track_selected_back.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\track_selected_back.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",

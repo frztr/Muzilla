@@ -27,52 +27,58 @@ public class HttpQuery extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        URL url = null;
         try {
-            url = new URL(strings[0]);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        HttpURLConnection connection = null;
-        try {
-            connection = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection.setRequestMethod("GET");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        }
-        connection.setDoOutput(true);
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
-        try {
-            connection.connect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BufferedReader rd = null;
-        try {
-            rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String content = "", line = "";
-        while (true) {
+            URL url = null;
             try {
-                if (!((line = rd.readLine()) != null)) break;
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) url.openConnection();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            content += line + "\n";
-        }
+            try {
+                connection.setRequestMethod("GET");
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            }
+            connection.setDoOutput(true);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            try {
+                connection.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            BufferedReader rd = null;
+            try {
+                rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String content = "", line = "";
+            while (true) {
+                try {
+                    if (!((line = rd.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                content += line + "\n";
+            }
 
-        return content;
+            return content;
+        }
+        catch(Exception ex)
+        {
+            return  null;
+        }
     }
 
     protected void onPostExecute(String result) {
-
+      //  Log.e("Console", result );
         atb.Response = result;
         atb.onSuccessExecute.run();
     }

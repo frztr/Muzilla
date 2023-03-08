@@ -4,10 +4,12 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -24,16 +26,29 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final EditText accessTokenInput;
 
   @NonNull
+  public final CardView accessTokenInputCard;
+
+  @NonNull
+  public final Button chooseWallButton;
+
+  @NonNull
+  public final TextView labelChooseWall;
+
+  @NonNull
   public final TextView labelToken;
 
   @NonNull
   public final TextView settingstitle;
 
   private FragmentSettingsBinding(@NonNull ConstraintLayout rootView,
-      @NonNull EditText accessTokenInput, @NonNull TextView labelToken,
-      @NonNull TextView settingstitle) {
+      @NonNull EditText accessTokenInput, @NonNull CardView accessTokenInputCard,
+      @NonNull Button chooseWallButton, @NonNull TextView labelChooseWall,
+      @NonNull TextView labelToken, @NonNull TextView settingstitle) {
     this.rootView = rootView;
     this.accessTokenInput = accessTokenInput;
+    this.accessTokenInputCard = accessTokenInputCard;
+    this.chooseWallButton = chooseWallButton;
+    this.labelChooseWall = labelChooseWall;
     this.labelToken = labelToken;
     this.settingstitle = settingstitle;
   }
@@ -71,6 +86,24 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.access_token_input_card;
+      CardView accessTokenInputCard = ViewBindings.findChildViewById(rootView, id);
+      if (accessTokenInputCard == null) {
+        break missingId;
+      }
+
+      id = R.id.choose_wall_button;
+      Button chooseWallButton = ViewBindings.findChildViewById(rootView, id);
+      if (chooseWallButton == null) {
+        break missingId;
+      }
+
+      id = R.id.label_choose_wall;
+      TextView labelChooseWall = ViewBindings.findChildViewById(rootView, id);
+      if (labelChooseWall == null) {
+        break missingId;
+      }
+
       id = R.id.label_token;
       TextView labelToken = ViewBindings.findChildViewById(rootView, id);
       if (labelToken == null) {
@@ -83,8 +116,8 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentSettingsBinding((ConstraintLayout) rootView, accessTokenInput, labelToken,
-          settingstitle);
+      return new FragmentSettingsBinding((ConstraintLayout) rootView, accessTokenInput,
+          accessTokenInputCard, chooseWallButton, labelChooseWall, labelToken, settingstitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
