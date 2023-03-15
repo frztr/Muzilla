@@ -1,70 +1,89 @@
-com/example/muzilla/Track.java
- com.example.muzilla.Track
+com/example/muzilla/IBaseFragment.java
+ com.example.muzilla.IBaseFragment
 com/example/muzilla/SliderAdapter.java
  com.example.muzilla.SliderAdapter
-com/example/muzilla/LoadImage.java
- com.example.muzilla.LoadImage
 com/example/muzilla/ArrayListExtended.java
  com.example.muzilla.ArrayListExtended
-com/example/muzilla/API.java
- com.example.muzilla.API
 com/example/muzilla/BuildConfig.java
  com.example.muzilla.BuildConfig
+com/example/muzilla/AsyncTaskBody.java
+ com.example.muzilla.AsyncTaskBody
 com/example/muzilla/Playlist.java
  com.example.muzilla.Playlist
+com/example/muzilla/HttpQuery.java
+ com.example.muzilla.HttpQuery
+com/example/muzilla/API.java
+ com.example.muzilla.API
+com/example/muzilla/Track.java
+ com.example.muzilla.Track
+com/example/muzilla/databinding/FragmentSettingsBinding.java
+ com.example.muzilla.databinding.FragmentSettingsBinding
+com/example/muzilla/NextIntent.java
+ com.example.muzilla.NextIntent
+com/example/muzilla/PopularFragment.java
+ com.example.muzilla.PopularFragment
+ com.example.muzilla.PopularFragment$1
 com/example/muzilla/AudioPlayer.java
  com.example.muzilla.AudioPlayer
  com.example.muzilla.AudioPlayer$1
  com.example.muzilla.AudioPlayer$2
  com.example.muzilla.AudioPlayer$3
-com/example/muzilla/IBaseFragment.java
- com.example.muzilla.IBaseFragment
-com/example/muzilla/HttpQuery.java
- com.example.muzilla.HttpQuery
-com/example/muzilla/AsyncTaskBody.java
- com.example.muzilla.AsyncTaskBody
-com/example/muzilla/databinding/FragmentSettingsBinding.java
- com.example.muzilla.databinding.FragmentSettingsBinding
-com/example/muzilla/PopularFragment.java
- com.example.muzilla.PopularFragment
- com.example.muzilla.PopularFragment$1
+ com.example.muzilla.AudioPlayer$AudioBinder
 com/example/muzilla/PlaylistAdapter.java
  com.example.muzilla.PlaylistAdapter
  com.example.muzilla.PlaylistAdapter$ViewHolder
+com/example/muzilla/databinding/ActivityPlayerBinding.java
+ com.example.muzilla.databinding.ActivityPlayerBinding
+com/example/muzilla/PlayIntent.java
+ com.example.muzilla.PlayIntent
 com/example/muzilla/databinding/FragmentSearchBinding.java
  com.example.muzilla.databinding.FragmentSearchBinding
 com/example/muzilla/databinding/ListItemTrackBinding.java
  com.example.muzilla.databinding.ListItemTrackBinding
-com/example/muzilla/databinding/FragmentMainBinding.java
- com.example.muzilla.databinding.FragmentMainBinding
 com/example/muzilla/MainFragment.java
  com.example.muzilla.MainFragment
  com.example.muzilla.MainFragment$1
  com.example.muzilla.MainFragment$2
+com/example/muzilla/SettingsFragment.java
+ com.example.muzilla.SettingsFragment
+ com.example.muzilla.SettingsFragment$1
+ com.example.muzilla.SettingsFragment$2
+ com.example.muzilla.SettingsFragment$2$1
 com/example/muzilla/SearchFragment.java
  com.example.muzilla.SearchFragment
  com.example.muzilla.SearchFragment$1
- com.example.muzilla.SearchFragment$1$1
+ com.example.muzilla.SearchFragment$2
+ com.example.muzilla.SearchFragment$2$1
 com/example/muzilla/RecommendationFragment.java
  com.example.muzilla.RecommendationFragment
  com.example.muzilla.RecommendationFragment$1
+com/example/muzilla/PreviousIntent.java
+ com.example.muzilla.PreviousIntent
+com/example/muzilla/PlayerActivity.java
+ com.example.muzilla.PlayerActivity
 com/example/muzilla/databinding/ListItemBinding.java
  com.example.muzilla.databinding.ListItemBinding
 com/example/muzilla/databinding/FragmentRecommendationBinding.java
  com.example.muzilla.databinding.FragmentRecommendationBinding
 com/example/muzilla/databinding/FragmentPopularBinding.java
  com.example.muzilla.databinding.FragmentPopularBinding
+com/example/muzilla/App.java
+ com.example.muzilla.App
+com/example/muzilla/databinding/FragmentMainBinding.java
+ com.example.muzilla.databinding.FragmentMainBinding
 com/example/muzilla/databinding/ActivityMainBinding.java
  com.example.muzilla.databinding.ActivityMainBinding
-com/example/muzilla/SettingsFragment.java
- com.example.muzilla.SettingsFragment
- com.example.muzilla.SettingsFragment$1
- com.example.muzilla.SettingsFragment$2
- com.example.muzilla.SettingsFragment$2$1
 com/example/muzilla/TrackAdapter.java
  com.example.muzilla.TrackAdapter
  com.example.muzilla.TrackAdapter$ViewHolder
  com.example.muzilla.TrackAdapter$ViewHolder$1
  com.example.muzilla.TrackAdapter$ViewHolder$2
+ com.example.muzilla.TrackAdapter$ViewHolder$3
 com/example/muzilla/MainActivity.java
  com.example.muzilla.MainActivity
+ com.example.muzilla.MainActivity$1
+ com.example.muzilla.MainActivity$2
+ com.example.muzilla.MainActivity$3
+ com.example.muzilla.MainActivity$4
+ com.example.muzilla.MainActivity$5
+ com.example.muzilla.MainActivity$6

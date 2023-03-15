@@ -35,6 +35,8 @@ anim nav_default_enter_anim
 anim nav_default_exit_anim
 anim nav_default_pop_enter_anim
 anim nav_default_pop_exit_anim
+anim slide_in_up
+anim slide_out_up
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -1123,6 +1125,7 @@ color background_floating_material_light
 color background_material_dark
 color background_material_light
 color black
+color black_20
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1139,6 +1142,7 @@ color checkbox_themeable_attribute_color
 color color1_0
 color color1_100
 color color2_100
+color color2_40
 color color2_66
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
@@ -1817,7 +1821,6 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
-drawable back
 drawable backgradient
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -1844,6 +1847,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_music_circle
 drawable ic_pause__1_
 drawable ic_play__1_
 drawable ic_skip_next
@@ -1885,6 +1889,9 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable playergradient
 drawable playlist_gradient
+drawable seek_bar_drawable
+drawable seek_bar_progress
+drawable seekbar_progress_background
 drawable test_custom_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
@@ -2014,6 +2021,7 @@ id cache_measures
 id callMeasure
 id cancel_action
 id cancel_button
+id cardView_music_icon
 id carryVelocity
 id center
 id center_horizontal
@@ -2031,6 +2039,7 @@ id choose_wall_button
 id chronometer
 id circle_center
 id cl1
+id cl2
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -2259,6 +2268,12 @@ id pathRelative
 id peekHeight
 id percent
 id pin
+id player_durations
+id player_music_icon
+id player_seekbar
+id player_seekbar_element
+id player_track_musician
+id player_track_name
 id playlist_logo
 id playlist_musician
 id playlist_name
@@ -2419,6 +2434,7 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id wall_back_player
 id west
 id withText
 id withinBounds
@@ -2497,6 +2513,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_player
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

@@ -50,8 +50,10 @@ public class TrackAdapter extends RecyclerView.Adapter {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+
         Track track = tracks.get(position);
         TrackAdapter.ViewHolder viewHolder = (TrackAdapter.ViewHolder) holder;
+
         if(track.getImgUrl()!="")
         {
             Picasso.get().load(track.getImgUrl()).into(viewHolder.flagView);
@@ -68,7 +70,8 @@ public class TrackAdapter extends RecyclerView.Adapter {
         viewHolder.track_id = track.getId();
 
         if(((MainActivity) viewHolder.trackAdapter.context).AudioPlayer.getCurrentTrack()!=null){
-            if (viewHolder.track_id == ((MainActivity) viewHolder.trackAdapter.context).AudioPlayer.getCurrentTrack().getId()) {
+
+            if (track.getId().equals(((MainActivity) viewHolder.trackAdapter.context).AudioPlayer.getCurrentTrack().getId())) {
                 viewHolder.track_item_wall.setVisibility(View.VISIBLE);
             } else {
                 viewHolder.track_item_wall.setVisibility(View.INVISIBLE);
@@ -89,6 +92,75 @@ public class TrackAdapter extends RecyclerView.Adapter {
         String track_id;
         TrackAdapter trackAdapter;
 
+        public void Update(View view)
+        {
+            if(((MainActivity)trackAdapter.context).AudioPlayer.getCurrentTrack()!=null)
+            {
+                if(view.isAttachedToWindow()) {
+                    if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id) {
+                        if(((MainActivity) trackAdapter.context).last_track != null) {
+                            if (((MainActivity) trackAdapter.context).last_track.getId() != track_id) {
+                                Animator animator = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, 0f, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2));
+                                animator.setDuration(300);
+                                animator.setInterpolator(new AccelerateInterpolator());
+                                track_item_wall.setVisibility(View.VISIBLE);
+                                animator.start();
+                            }
+                        }
+                        else {
+                            Animator animator = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, 0f, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2));
+                            animator.setDuration(300);
+                            animator.setInterpolator(new AccelerateInterpolator());
+                            track_item_wall.setVisibility(View.VISIBLE);
+                            animator.start();
+                        }
+                    }
+                    else
+                    {
+                        if (track_item_wall.getVisibility() == View.VISIBLE) {
+
+                            Animator animator2 = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2), 0f);
+                            animator2.setDuration(300);
+                            animator2.setInterpolator(new AccelerateInterpolator());
+                            animator2.addListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animator) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animator) {
+                                    track_item_wall.setVisibility(View.INVISIBLE);
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animator) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animator) {
+
+                                }
+                            });
+                            animator2.start();
+                        }
+                    }
+                }
+                else
+                {
+                    if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id)
+                    {
+                        track_item_wall.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        track_item_wall.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        }
+
 
         ViewHolder(View view,TrackAdapter adapter){
             super(view);
@@ -101,129 +173,82 @@ public class TrackAdapter extends RecyclerView.Adapter {
             track_item_wall = view.findViewById(R.id.track_item_wall);
 
 
+
             ((MainActivity)trackAdapter.context).AudioPlayer.addOnTrackLoadedListener(()->
             {
-                if(((MainActivity)trackAdapter.context).AudioPlayer.getCurrentTrack()!=null)
+                Update(view);
+            });
+
+            ((MainActivity)trackAdapter.context).AudioPlayer.addOnCurrentTrackStateChanged(()->
+            {
+                if(((MainActivity)trackAdapter.context).AudioPlayer.getCurrentTrack()==null)
                 {
-                    if(view.isAttachedToWindow()) {
-                        if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id) {
-                            Animator animator = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, 0f, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2));
-                            animator.setDuration(300);
-                            animator.setInterpolator(new AccelerateInterpolator());
-                            track_item_wall.setVisibility(View.VISIBLE);
-                            animator.start();
+                    if (track_item_wall.getVisibility() == View.VISIBLE) {
+
+                        if (view.isAttachedToWindow()) {
+                            Animator animator2 = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2), 0f);
+                            animator2.setDuration(300);
+                            animator2.setInterpolator(new AccelerateInterpolator());
+                            animator2.addListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animator) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animator) {
+                                    track_item_wall.setVisibility(View.INVISIBLE);
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animator) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animator) {
+
+                                }
+                            });
+                            animator2.start();
                         }
-                        else
+                        } else
                         {
-                            if (track_item_wall.getVisibility() == View.VISIBLE) {
-
-                                Animator animator2 = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2), 0f);
-                                animator2.setDuration(300);
-                                animator2.setInterpolator(new AccelerateInterpolator());
-                                animator2.addListener(new Animator.AnimatorListener() {
-                                    @Override
-                                    public void onAnimationStart(Animator animator) {
-
-                                    }
-
-                                    @Override
-                                    public void onAnimationEnd(Animator animator) {
-                                        track_item_wall.setVisibility(View.INVISIBLE);
-                                    }
-
-                                    @Override
-                                    public void onAnimationCancel(Animator animator) {
-
-                                    }
-
-                                    @Override
-                                    public void onAnimationRepeat(Animator animator) {
-
-                                    }
-                                });
-                                animator2.start();
-                            }
+                        track_item_wall.setVisibility(View.INVISIBLE);
                         }
-                    }
-                    else
-                    {
-                        if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id)
-                        {
-                            track_item_wall.setVisibility(View.VISIBLE);
-                        }
-                        else
-                        {
-                            track_item_wall.setVisibility(View.INVISIBLE);
-                        }
-                    }
                 }
             });
+
 
             track_item.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("ResourceAsColor")
                 @Override
                 public void onClick(View view) {
 
-                    if(((MainActivity)trackAdapter.context).AudioPlayer.getPlaylist() != trackAdapter.tracks)
-                    {
-                        ((MainActivity)trackAdapter.context).AudioPlayer.setPlaylist(trackAdapter.tracks);
-                        ((MainActivity)trackAdapter.context).AudioPlayer.Play(getAdapterPosition());
+                    AudioPlayer ap = ((MainActivity) trackAdapter.context).AudioPlayer;
+                    if(ap.getCurrentTrack()!=null) {
+                        if (ap.getCurrentTrack().getId().equals(trackAdapter.tracks.get(getAdapterPosition()).getId())) {
+                            if (ap.isPlaying()) {
+                                ap.Pause();
+                            } else {
+                                ap.Play();
+                            }
+                        } else {
+                            if (ap.getPlaylist() != trackAdapter.tracks) {
+                                ap.setPlaylist(trackAdapter.tracks);
+                                ap.Play(getAdapterPosition());
+                            } else {
+                                ap.Play(getAdapterPosition());
+                            }
+                        }
                     }
                     else
                     {
-                        ((MainActivity)trackAdapter.context).AudioPlayer.Play(getAdapterPosition());
+                            ap.setPlaylist(trackAdapter.tracks);
+                            ap.Play(getAdapterPosition());
                     }
-
-//                if(last_index != position) {
-//                    Animator animator = ViewAnimationUtils.createCircularReveal(viewHolder.track_item_wall, 0, viewHolder.track_item_wall.getHeight() / 2, 0f, (float) Math.hypot(viewHolder.track_item_wall.getWidth(), viewHolder.track_item_wall.getHeight() / 2));
-//                    animator.setDuration(300);
-//                    animator.setInterpolator(new AccelerateInterpolator());
-//                    viewHolder.track_item_wall.setVisibility(View.VISIBLE);
-//                    animator.start();
-//                    if (SelectedViewWall != null) {
-//                        ConstraintLayout last = SelectedViewWall;
-//                        try {
-//                            Animator animator2 = ViewAnimationUtils.createCircularReveal(last, 0, last.getHeight() / 2, (float) Math.hypot(last.getWidth(), last.getHeight() / 2), 0f);
-//                            animator2.setDuration(300);
-//                            animator2.setInterpolator(new AccelerateInterpolator());
-//                            animator2.addListener(new Animator.AnimatorListener() {
-//                                @Override
-//                                public void onAnimationStart(Animator animator) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onAnimationEnd(Animator animator) {
-//                                    last.setVisibility(View.INVISIBLE);
-//                                }
-//
-//                                @Override
-//                                public void onAnimationCancel(Animator animator) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onAnimationRepeat(Animator animator) {
-//
-//                                }
-//                            });
-//                            animator2.start();
-//                        }
-//                        catch (Exception ex)
-//                        {
-//
-////                        }
-//                    }
-//                    SelectedViewWall = viewHolder.track_item_wall;
-//
-//               }
-//                last_index = position;
                 }
             });
         }
-
-
     }
-
-
 }

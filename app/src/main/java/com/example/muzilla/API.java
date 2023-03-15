@@ -52,7 +52,6 @@ public class API
                         e.printStackTrace();
                     }
                 }
-
                 tracks.Update();
             });
             HttpQuery httpQuery = new HttpQuery(atb);

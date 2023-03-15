@@ -16,6 +16,10 @@
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_player.xml",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\activity_player.xml"
+    },
+    {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\activity_main.xml"
     },

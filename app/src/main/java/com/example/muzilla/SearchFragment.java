@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ public class SearchFragment extends Fragment {
         this.api = api;
     }
 
-
+    private  String old_text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,7 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -48,13 +47,21 @@ public class SearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         EditText edt = (EditText) getView().findViewById(R.id.search_input);
+        CardView cv = (CardView) getView().findViewById(R.id.search_input_layout);
+        cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt.requestFocus();
+            }
+        });
+
         edt.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent)
             {
-                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER)
+                EditText editText = (EditText) view;
+                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER && old_text != editText.getText().toString())
                 {
-                    EditText editText = (EditText) view;
                     ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(editText.getWindowToken(),0);
                     RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_search);
                     ArrayListExtended<Track> tracks = new ArrayListExtended<Track>();
@@ -75,9 +82,14 @@ public class SearchFragment extends Fragment {
                             }
                         }
                     });
+                    old_text = editText.getText().toString();
                     return true;
                 }
-                return false;
+                else
+                    {
+                        old_text = editText.getText().toString();
+                    return false;
+                }
             }
         });
     }

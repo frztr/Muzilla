@@ -30,10 +30,6 @@ public class MainFragment extends Fragment {
         this.profileId = profileId;
         tracks = new ArrayListExtended<Track>();
         playlists = new ArrayListExtended<Playlist>();
-
-
-
-
         api.getMyPlaylists(playlists,this.profileId,0);
         api.getMyAudio(tracks,0);
     }
@@ -89,14 +85,6 @@ public class MainFragment extends Fragment {
                 }
             }
         });
-
-        tracks.addListener(()->
-        {
-
-          //  ((MainActivity)getActivity()).AudioPlayer.setPlaylist(tracks.arrayList);
-          //  ((MainActivity)getActivity()).AudioPlayer.Play(0);
-        });
-
 
     }
 }

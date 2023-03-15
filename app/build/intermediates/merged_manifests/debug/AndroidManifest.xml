@@ -12,8 +12,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name="com.example.muzilla.App"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -23,11 +25,20 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
-        <activity
-            android:name="com.example.muzilla.MainPage"
+        <service
+            android:name="com.example.muzilla.AudioPlayer"
+            android:enabled="true"
             android:exported="true"
-            android:label="@string/title_activity_main_page"
-            android:theme="@style/NoActionBar" />
+            android:foregroundServiceType="mediaPlayback" >
+        </service>
+
+        <receiver android:name="com.example.muzilla.PlayIntent" />
+        <receiver android:name="com.example.muzilla.PreviousIntent" />
+        <receiver android:name="com.example.muzilla.NextIntent" />
+
+        <activity
+            android:name="com.example.muzilla.PlayerActivity"
+            android:exported="true" />
         <activity
             android:name="com.example.muzilla.MainActivity"
             android:exported="true" >

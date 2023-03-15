@@ -24,12 +24,7 @@ import android.widget.ImageView;
 
 public class SettingsFragment extends Fragment implements IBaseFragment {
 
-
-
     private SharedPreferences sp;
-
-    public SettingsFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +32,7 @@ public class SettingsFragment extends Fragment implements IBaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
@@ -97,12 +91,10 @@ public class SettingsFragment extends Fragment implements IBaseFragment {
 
     public void ChooseFile(View v)
     {
-
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("image/*");
             startActivityForResult(Intent.createChooser(intent, "Select image"), 1);
-
     }
 
     @Override

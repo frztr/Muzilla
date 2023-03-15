@@ -34,6 +34,8 @@ int anim nav_default_enter_anim 0x7f010020
 int anim nav_default_exit_anim 0x7f010021
 int anim nav_default_pop_enter_anim 0x7f010022
 int anim nav_default_pop_exit_anim 0x7f010023
+int anim slide_in_up 0x7f010024
+int anim slide_out_up 0x7f010025
 int animator design_appbar_state_list_animator 0x7f020000
 int animator design_fab_hide_motion_spec 0x7f020001
 int animator design_fab_show_motion_spec 0x7f020002
@@ -1122,6 +1124,7 @@ int color background_floating_material_light 0x7f05001f
 int color background_material_dark 0x7f050020
 int color background_material_light 0x7f050021
 int color black 0x7f050022
+int color black_20 0x7f0500dc
 int color bright_foreground_disabled_material_dark 0x7f050023
 int color bright_foreground_disabled_material_light 0x7f050024
 int color bright_foreground_inverse_material_dark 0x7f050025
@@ -1138,6 +1141,7 @@ int color checkbox_themeable_attribute_color 0x7f05002f
 int color color1_0 0x7f050030
 int color color1_100 0x7f050031
 int color color2_100 0x7f050032
+int color color2_40 0x7f0500dd
 int color color2_66 0x7f050033
 int color design_bottom_navigation_shadow_color 0x7f050034
 int color design_box_stroke_color 0x7f050035
@@ -1816,7 +1820,6 @@ int drawable abc_textfield_search_material 0x7f070054
 int drawable abc_vector_test 0x7f070055
 int drawable avd_hide_password 0x7f070056
 int drawable avd_show_password 0x7f070057
-int drawable back 0x7f070058
 int drawable backgradient 0x7f070059
 int drawable btn_checkbox_checked_mtrl 0x7f07005a
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f07005b
@@ -1843,6 +1846,7 @@ int drawable ic_mtrl_checked_circle 0x7f07006f
 int drawable ic_mtrl_chip_checked_black 0x7f070070
 int drawable ic_mtrl_chip_checked_circle 0x7f070071
 int drawable ic_mtrl_chip_close_circle 0x7f070072
+int drawable ic_music_circle 0x7f0700a6
 int drawable ic_pause__1_ 0x7f0700a2
 int drawable ic_play__1_ 0x7f070073
 int drawable ic_skip_next 0x7f070074
@@ -1884,6 +1888,9 @@ int drawable notification_tile_bg 0x7f070097
 int drawable notify_panel_notification_icon_bg 0x7f070098
 int drawable playergradient 0x7f070099
 int drawable playlist_gradient 0x7f07009a
+int drawable seek_bar_drawable 0x7f0700a3
+int drawable seek_bar_progress 0x7f0700a4
+int drawable seekbar_progress_background 0x7f0700a5
 int drawable test_custom_background 0x7f07009b
 int drawable test_level_drawable 0x7f07009c
 int drawable tooltip_frame_dark 0x7f07009d
@@ -2013,6 +2020,7 @@ int id cache_measures 0x7f090069
 int id callMeasure 0x7f09006a
 int id cancel_action 0x7f09006b
 int id cancel_button 0x7f09006c
+int id cardView_music_icon 0x7f09020c
 int id carryVelocity 0x7f09006d
 int id center 0x7f09006e
 int id center_horizontal 0x7f09006f
@@ -2030,6 +2038,7 @@ int id choose_wall_button 0x7f09020a
 int id chronometer 0x7f09007a
 int id circle_center 0x7f09007b
 int id cl1 0x7f09007c
+int id cl2 0x7f090213
 int id clear_text 0x7f09007d
 int id clip_horizontal 0x7f09007e
 int id clip_vertical 0x7f09007f
@@ -2258,6 +2267,12 @@ int id pathRelative 0x7f09015c
 int id peekHeight 0x7f09015d
 int id percent 0x7f09015e
 int id pin 0x7f09015f
+int id player_durations 0x7f09020d
+int id player_music_icon 0x7f09020e
+int id player_seekbar 0x7f09020f
+int id player_seekbar_element 0x7f090210
+int id player_track_musician 0x7f090211
+int id player_track_name 0x7f090212
 int id playlist_logo 0x7f090160
 int id playlist_musician 0x7f090161
 int id playlist_name 0x7f090162
@@ -2418,6 +2433,7 @@ int id view_tree_saved_state_registry_owner 0x7f0901fc
 int id view_tree_view_model_store_owner 0x7f0901fd
 int id visible 0x7f0901fe
 int id visible_removing_fragment_view_tag 0x7f0901ff
+int id wall_back_player 0x7f090214
 int id west 0x7f090200
 int id withText 0x7f090201
 int id withinBounds 0x7f090202
@@ -2496,6 +2512,7 @@ int layout abc_search_view 0x7f0c0019
 int layout abc_select_dialog_material 0x7f0c001a
 int layout abc_tooltip 0x7f0c001b
 int layout activity_main 0x7f0c001c
+int layout activity_player 0x7f0c0081
 int layout custom_dialog 0x7f0c001d
 int layout design_bottom_navigation_item 0x7f0c001e
 int layout design_bottom_sheet_dialog 0x7f0c001f

@@ -44,21 +44,19 @@
         ></androidx.viewpager2.widget.ViewPager2>
 
     <LinearLayout
-        android:scaleY="0"
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="11dp"
+        android:layout_height="78dp"
         android:background="@drawable/playergradient"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="10.45dp"
-        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:paddingRight="10.45dp"
-        android:paddingBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
 
         <androidx.cardview.widget.CardView
             android:layout_width="55.6dp"
@@ -156,13 +154,13 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
-        android:layout_height="58dp"
+        android:layout_height="69dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingTop="5.5dp"
-        android:paddingBottom="5.5dp">
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp">
 
         <ImageButton
             android:id="@+id/imageButton5"

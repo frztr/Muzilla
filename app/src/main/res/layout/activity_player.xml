@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayerActivity"
+    android:background="@color/back"
+    android:id="@+id/cl2">
+    <ImageView
+        android:id="@+id/wall_back_player"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.3"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <!--        android:background="@drawable/back"-->
+    </ImageView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha="0.2"
+        android:background="@drawable/backgradient"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="47.27dp"
+        android:layout_marginBottom="46.18dp"
+        android:layout_marginLeft="57.45dp"
+        android:layout_marginRight="57.45dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_music_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="43.63dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/player_music_icon"
+                android:layout_width="277.81dp"
+                android:layout_height="277.81dp"
+                android:src="@drawable/music_icon" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/player_track_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INFINITY"
+            android:textAlignment="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:minHeight="56.36dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_music_icon"
+            android:textSize="23.27dp"
+            android:layout_marginTop="24.36dp"
+            />
+
+        <TextView
+            android:id="@+id/player_track_musician"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LXST CXNTURY"
+            android:textAlignment="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:minHeight="56.36dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_track_name"
+            android:textSize="18.18dp"
+            android:layout_marginTop="24.36dp"
+            />
+        <LinearLayout
+            android:id="@+id/player_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/player_track_musician"
+            android:layout_marginTop="31.63dp"
+            android:orientation="vertical"
+            >
+         <SeekBar
+             android:id="@+id/player_seekbar_element"
+             android:layout_width="match_parent"
+             android:layout_height="19.54dp"
+             android:thumbTint="@color/color2_100"
+             android:progress="45"
+             android:progressDrawable="@drawable/seek_bar_drawable"
+             android:paddingTop="8.04dp"
+             android:paddingBottom="8.04dp"
+             >
+
+         </SeekBar>
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/player_durations"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:layout_constraintLeft_toLeftOf="@+id/player_seekbar"
+             app:layout_constraintRight_toRightOf="@+id/player_seekbar"
+             app:layout_constraintTop_toTopOf="@+id/player_seekbar_element"
+             android:layout_marginLeft="10dp"
+             android:layout_marginRight="14dp"
+             >
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintLeft_toLeftOf="@+id/player_durations"
+                 app:layout_constraintTop_toTopOf="@+id/player_durations"
+                 android:text="0:00"
+                 android:textColor="@color/color2_100"
+                 android:fontFamily="@font/roboto_black"
+                 android:textSize="14.54dp" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintRight_toRightOf="@+id/player_durations"
+                 app:layout_constraintTop_toTopOf="@+id/player_durations"
+                 android:text="2:22"
+                 android:textColor="@color/color2_100"
+                 android:fontFamily="@font/roboto_black"
+                 android:textSize="14.54dp"/>
+         </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
