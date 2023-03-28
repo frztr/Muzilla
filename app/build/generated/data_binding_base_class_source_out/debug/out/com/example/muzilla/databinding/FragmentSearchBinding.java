@@ -4,7 +4,6 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -12,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.example.muzilla.CustomEditText;
 import com.example.muzilla.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,7 +22,7 @@ public final class FragmentSearchBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final EditText searchInput;
+  public final CustomEditText searchInput;
 
   @NonNull
   public final CardView searchInputLayout;
@@ -30,8 +30,9 @@ public final class FragmentSearchBinding implements ViewBinding {
   @NonNull
   public final RecyclerView tracksListSearch;
 
-  private FragmentSearchBinding(@NonNull ConstraintLayout rootView, @NonNull EditText searchInput,
-      @NonNull CardView searchInputLayout, @NonNull RecyclerView tracksListSearch) {
+  private FragmentSearchBinding(@NonNull ConstraintLayout rootView,
+      @NonNull CustomEditText searchInput, @NonNull CardView searchInputLayout,
+      @NonNull RecyclerView tracksListSearch) {
     this.rootView = rootView;
     this.searchInput = searchInput;
     this.searchInputLayout = searchInputLayout;
@@ -66,7 +67,7 @@ public final class FragmentSearchBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.search_input;
-      EditText searchInput = ViewBindings.findChildViewById(rootView, id);
+      CustomEditText searchInput = ViewBindings.findChildViewById(rootView, id);
       if (searchInput == null) {
         break missingId;
       }

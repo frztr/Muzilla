@@ -1,93 +1,113 @@
 package com.example.muzilla;
-
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.os.Binder;
-import android.os.Build;
-import android.os.IBinder;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.util.Log;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class AudioPlayer extends Service {
+public class AudioPlayer {
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private ArrayList<Track> playlist = new ArrayList<Track>();
-    private API API;
+    private ArrayList<Track> shuffled_list = new ArrayList<Track>();
     private int current_pos = -1;
     private boolean Playing = false;
-    private ArrayList<Runnable> PlayingListeners = new ArrayList<Runnable>();
-    private ArrayList<Runnable> onTrackLoadedListeners = new ArrayList<Runnable>();
-    private ArrayList<Runnable> onCurrentTrackStateChangedListeners =  new ArrayList<Runnable>();
+
+    private ArrayList<ViewUpdater> updaters = new ArrayList<ViewUpdater>();
     private Track current_track;
+    private boolean Shuffle_On = false;
+    private boolean isPrepared;
 
     private void PlayingUpdate()
     {
-        for (Runnable r: PlayingListeners)
+        for (ViewUpdater updater: updaters)
         {
-         r.run();
+            updater.onPlayingStateChanged();
+        }
+
+        if(Playing)
+        {
+           TimerOn();
+        }
+        else
+            {
+                TimerOff();
+            }
+    }
+
+    private void LoopStateChange()
+    {
+
+        for (ViewUpdater updater: updaters)
+        {
+            updater.onLoopStateChange();
         }
     }
+
 
     private void OnTrackChanged()
     {
-        for (Runnable r:onTrackLoadedListeners) {
-            r.run();
+
+        for (ViewUpdater updater: updaters)
+        {
+            updater.onTrackLoaded();
         }
     }
 
-    public void addPlayingListener(Runnable r)
+    public void DurationUpdate()
     {
-        PlayingListeners.add(r);
-        PlayingUpdate();
-    }
 
-    public void removePlayingListener(Runnable r)
-    {
-        PlayingListeners.remove(r);
-        PlayingUpdate();
-    }
-
-    public void addOnTrackLoadedListener(Runnable r)
-    {
-        onTrackLoadedListeners.add(r);
-    }
-
-    public void removeOnTrackLoadedListener(Runnable r)
-    {
-        onTrackLoadedListeners.remove(r);
-    }
-
-    public void addOnCurrentTrackStateChanged(Runnable r)
-    {
-        onCurrentTrackStateChangedListeners.add(r);
-        CurrentTrackStateChanged();
-    }
-
-    public void removeOnCurrentTrackExistsListener(Runnable r)
-    {
-        onCurrentTrackStateChangedListeners.remove(r);
-        CurrentTrackStateChanged();
-    }
-
-    public void CurrentTrackStateChanged()
-    {
-        for (Runnable r:onCurrentTrackStateChangedListeners) {
-            r.run();
+        for (ViewUpdater updater: updaters)
+        {
+            updater.onTrackCurrentDurationChanged();
         }
+    }
+
+    private void CurrentTrackStateChanged()
+    {
+
+        for (ViewUpdater updater: updaters)
+        {
+            updater.onCurrentTrackStateChanged();
+        }
+    }
+
+    private  void ShuffleStateChanged()
+    {
+
+        for (ViewUpdater updater: updaters)
+        {
+             updater.onShuffleStateChanged();
+        }
+    }
+
+    public void addUpdater(ViewUpdater viewUpdater)
+    {
+        updaters.add(viewUpdater);
+    }
+
+    public void removeUpdater(ViewUpdater viewUpdater)
+    {
+        updaters.remove(viewUpdater);
+    }
+
+    Timer timer = new Timer();
+
+    private static AudioPlayer instance;
+
+    public static AudioPlayer getInstance()
+    {
+        if(instance==null)
+        {
+            instance = new AudioPlayer();
+        }
+        return instance;
+    }
+
+    public static void setInstance(AudioPlayer audioPlayer)
+    {
+        instance = audioPlayer;
     }
 
     public AudioPlayer()
@@ -95,12 +115,36 @@ public class AudioPlayer extends Service {
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                Playing = false;
-                Next();
-                CurrentTrackStateChanged();
-                PlayingUpdate();
+                if(!getLoopState()) {
+                    Playing = false;
+                    PlayingUpdate();
+                    if(isPrepared) {
+                        Next();
+                    }
+                    CurrentTrackStateChanged();
+                }
             }
         });
+        DurationUpdate();
+    }
+
+    private void TimerOn()
+    {
+        timer = new Timer();
+        timer.schedule(new TimerTask(){
+            @Override
+            public void run() {
+                if(mediaPlayer.isPlaying())
+                {
+                    DurationUpdate();
+                }
+            }
+        },0,1000);
+    }
+
+    private void TimerOff()
+    {
+        timer.cancel();
     }
 
     public boolean isPlaying()
@@ -114,18 +158,7 @@ public class AudioPlayer extends Service {
             Playing = false;
             PlayingUpdate();
             mediaPlayer.pause();
-            createNotification();
         }
-    }
-
-    public void setDuration()
-    {
-
-    }
-
-    public int getDuration()
-    {
-        return 0;
     }
 
     public void setPlaylist(ArrayList<Track> playlist) {
@@ -134,12 +167,14 @@ public class AudioPlayer extends Service {
 
     public void Play(int pos)
     {
+        boolean loop = mediaPlayer.isLooping();
         mediaPlayer.stop();
+        isPrepared = false;
         mediaPlayer.reset();
-
+        mediaPlayer.setLooping(loop);
         try {
             current_pos = pos;
-            Track track = playlist.get(current_pos);
+            Track track = getPlaylist().get(current_pos);
             current_track = track;
             OnTrackChanged();
             CurrentTrackStateChanged();
@@ -148,10 +183,11 @@ public class AudioPlayer extends Service {
                 {
                     if(current_track.getMusicUrl()!=null)
                     {
+
                         ForcePlay();
                     }
                 });
-                API.getTrackById(track);
+                API.getInstance().getTrackById(track);
             }
             else
             {
@@ -170,9 +206,8 @@ public class AudioPlayer extends Service {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer)
                 {
+                    isPrepared = true;
                     Play();
-
-
                 }
             });
             mediaPlayer.prepareAsync();
@@ -181,76 +216,13 @@ public class AudioPlayer extends Service {
         }
     }
 
-    private void createNotification()
-    {
-        Intent notifintent = new Intent(getApplicationContext(),AudioPlayer.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, notifintent, 0);
-
-        final Bitmap[] bmp = {null};
-        if(current_track.getImgUrl()!="")
-        {
-
-               Picasso.get().load(current_track.getImgUrl()).into(new Target() {
-                   @Override
-                   public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                       bmp[0] = bitmap;
-                   }
-
-                   @Override
-                   public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-                   }
-
-                   @Override
-                   public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                   }
-               });
-        }
-        else
-        {
-                bmp[0] = BitmapFactory.decodeResource(getResources(),R.drawable.music_icon);
-        }
-
-        Intent playingIntent = new Intent(getApplicationContext(),PlayIntent.class);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(this,0,playingIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        Intent playingIntent2 = new Intent(getApplicationContext(),PreviousIntent.class);
-        PendingIntent actionIntent2 = PendingIntent.getBroadcast(this,0,playingIntent2,PendingIntent.FLAG_UPDATE_CURRENT);
-        Intent playingIntent3 = new Intent(getApplicationContext(),NextIntent.class);
-        PendingIntent actionIntent3 = PendingIntent.getBroadcast(this,0,playingIntent3,PendingIntent.FLAG_UPDATE_CURRENT);
-        int playing_ico = -1;
-        if(isPlaying())
-        {
-            playing_ico = R.drawable.ic_pause__1_;
-        }
-        else
-        {
-                playing_ico = R.drawable.ic_play__1_;
-        }
-        Notification notification =
-                null;
-            notification = new NotificationCompat.Builder(getApplicationContext(), "TestChannel")
-                    .setContentTitle(current_track.getName())
-                    .setContentText(current_track.getMusician())
-                    .setSmallIcon(R.drawable.ic_music_circle)
-                    .setLargeIcon(bmp[0])
-                    .setStyle( new androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(cmpt.getSessionToken()))
-                    .setOnlyAlertOnce(true)
-                    .addAction(R.drawable.ic_skip_previous,"Previous",actionIntent2)
-                    .addAction(playing_ico,"Play",actionIntent)
-                    .addAction(R.drawable.ic_skip_next,"Next",actionIntent3)
-                    .setContentIntent(pendingIntent)
-                    .build();
-
-        startForeground(1,notification);
-    }
-
     public void Play()
     {
         Playing = true;
         PlayingUpdate();
-        mediaPlayer.start();
-        createNotification();
+        if(isPlaying()) {
+            mediaPlayer.start();
+        }
     }
 
     public void Stop()
@@ -259,8 +231,9 @@ public class AudioPlayer extends Service {
         current_track = null;
         CurrentTrackStateChanged();
         mediaPlayer.stop();
-
     }
+
+
 
     public void Prev()
     {
@@ -274,7 +247,7 @@ public class AudioPlayer extends Service {
     }
     public void Next()
     {
-        if(current_pos+1< playlist.size())
+        if(current_pos+1< getPlaylist().size())
         {
             Play(current_pos + 1);
         }
@@ -284,64 +257,101 @@ public class AudioPlayer extends Service {
         }
     }
 
+    public ArrayList<Track> getOriginalPlaylist()
+    {
+        return playlist;
+    }
+
     public ArrayList<Track> getPlaylist()
     {
-        return  playlist;
+        if(Shuffle_On)
+        {
+            return shuffled_list;
+        }
+        else
+        {
+            return playlist;
+        }
     }
 
     public Track getCurrentTrack()
     {
-        if (current_track!=null)
+        return current_track;
+    }
+
+    public int getCurrent_pos()
+    {
+        return mediaPlayer.getCurrentPosition();
+    }
+
+    public void setCurrent_pos(int pos)
+    {
+        mediaPlayer.seekTo(pos);
+        DurationUpdate();
+    }
+
+    public void setLoop()
+    {
+        if(!mediaPlayer.isLooping())
         {
-            return  current_track;
+            mediaPlayer.setLooping(true);
         }
         else
         {
-            return null;
+            mediaPlayer.setLooping(false);
         }
+        LoopStateChange();
     }
 
-    AudioBinder audioBinder = new AudioBinder();
-
-    MediaSessionCompat cmpt;
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-
-        cmpt = new MediaSessionCompat(getApplicationContext(),"Muzilla");
-        return audioBinder;
-    }
-
-
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent notifintent = new Intent(this,AudioPlayer.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifintent, 0);
-
-        Notification notification =
-                new NotificationCompat.Builder(this, "TestChannel")
-                        .setContentTitle(getText(R.string.app_name))
-                        .setContentText(getText(R.string.app_name))
-                        .setSmallIcon(R.drawable.music_icon)
-                        .setContentIntent(pendingIntent)
-                        .build();
-
-        startForeground(1,notification);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            stopForeground(STOP_FOREGROUND_REMOVE);
-        }
-        return START_NOT_STICKY;
-    }
-
-    class AudioBinder extends Binder
+    public boolean getLoopState()
     {
-        AudioPlayer getService(API api)
-        {
-            AudioPlayer.this.API = api;
-            return AudioPlayer.this;
-        }
+        return mediaPlayer.isLooping();
     }
 
+    public void Shuffle() {
+       if(Shuffle_On)
+       {
+           for(int i = 0;i<getPlaylist().size();i++)
+           {
+               if(getCurrentTrack().getContentId().equals(playlist.get(i).getContentId()))
+               {
+                   current_pos = i;
+               }
+           }
+           Shuffle_On = false;
+       }
+       else
+       {
+           shuffled_list = new ArrayList<Track>();
+           shuffled_list.addAll(playlist);
+           Collections.shuffle(shuffled_list);
+
+           for(int i = 0;i<getPlaylist().size();i++)
+           {
+               if(getCurrentTrack()!=null) {
+                   if (getCurrentTrack().getContentId().equals(shuffled_list.get(i).getContentId())) {
+                       Track current = shuffled_list.get(i);
+                       Track first = shuffled_list.get(0);
+                       shuffled_list.set(0, current);
+                       shuffled_list.set(i, first);
+                       current_pos = 0;
+                   }
+               }
+               else
+               {
+
+               }
+           }
+           Shuffle_On = true;
+       }
+       ShuffleStateChanged();
+    }
+
+    public boolean getShuffle() {
+        return Shuffle_On;
+    }
+
+    public void setShuffle(boolean shuffle) {
+         Shuffle_On = shuffle;
+    }
 }

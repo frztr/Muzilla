@@ -46,8 +46,8 @@ public class HttpQuery extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
             connection.setDoOutput(true);
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
             try {
                 connection.connect();
             } catch (IOException e) {
@@ -78,7 +78,7 @@ public class HttpQuery extends AsyncTask<String,Void,String> {
     }
 
     protected void onPostExecute(String result) {
-      //  Log.e("Console", result );
+       // Log.e("Console", result + "" );
         atb.Response = result;
         atb.onSuccessExecute.run();
     }

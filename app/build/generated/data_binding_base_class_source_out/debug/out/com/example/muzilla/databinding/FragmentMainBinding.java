@@ -4,13 +4,14 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.example.muzilla.CustomEditText;
 import com.example.muzilla.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,20 +22,24 @@ public final class FragmentMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final RecyclerView playlistsList;
+  public final CustomEditText myaudioInput;
 
   @NonNull
-  public final TextView textView3;
+  public final CardView myaudioInputLayout;
+
+  @NonNull
+  public final RecyclerView playlistsList;
 
   @NonNull
   public final RecyclerView tracksListMain;
 
   private FragmentMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull RecyclerView playlistsList, @NonNull TextView textView3,
-      @NonNull RecyclerView tracksListMain) {
+      @NonNull CustomEditText myaudioInput, @NonNull CardView myaudioInputLayout,
+      @NonNull RecyclerView playlistsList, @NonNull RecyclerView tracksListMain) {
     this.rootView = rootView;
+    this.myaudioInput = myaudioInput;
+    this.myaudioInputLayout = myaudioInputLayout;
     this.playlistsList = playlistsList;
-    this.textView3 = textView3;
     this.tracksListMain = tracksListMain;
   }
 
@@ -65,15 +70,21 @@ public final class FragmentMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.playlists_list;
-      RecyclerView playlistsList = ViewBindings.findChildViewById(rootView, id);
-      if (playlistsList == null) {
+      id = R.id.myaudio_input;
+      CustomEditText myaudioInput = ViewBindings.findChildViewById(rootView, id);
+      if (myaudioInput == null) {
         break missingId;
       }
 
-      id = R.id.textView3;
-      TextView textView3 = ViewBindings.findChildViewById(rootView, id);
-      if (textView3 == null) {
+      id = R.id.myaudio_input_layout;
+      CardView myaudioInputLayout = ViewBindings.findChildViewById(rootView, id);
+      if (myaudioInputLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.playlists_list;
+      RecyclerView playlistsList = ViewBindings.findChildViewById(rootView, id);
+      if (playlistsList == null) {
         break missingId;
       }
 
@@ -83,8 +94,8 @@ public final class FragmentMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMainBinding((ConstraintLayout) rootView, playlistsList, textView3,
-          tracksListMain);
+      return new FragmentMainBinding((ConstraintLayout) rootView, myaudioInput, myaudioInputLayout,
+          playlistsList, tracksListMain);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

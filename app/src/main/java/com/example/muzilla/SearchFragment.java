@@ -24,18 +24,11 @@ import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
-    private API api;
-
-    public SearchFragment(API api) {
-        this.api = api;
-    }
-
-    private  String old_text;
+    private String old_text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -55,39 +48,41 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_search);
+        ArrayListExtended<Track> tracks = new ArrayListExtended<Track>();
+        API.getInstance().addPlaylistListener(tracks);
+        TrackAdapter adapter = new TrackAdapter(getView().getContext(),tracks.arrayList);
+        tracks.addListener(()->
+        {
+            adapter.notifyDataSetChanged();
+        });
+        rv.setAdapter(adapter);
+
         edt.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent)
             {
                 EditText editText = (EditText) view;
-                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER && old_text != editText.getText().toString())
+                if(keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER && !editText.getText().toString().equals(old_text))
                 {
                     ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(editText.getWindowToken(),0);
-                    RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_search);
-                    ArrayListExtended<Track> tracks = new ArrayListExtended<Track>();
-                    TrackAdapter adapter = new TrackAdapter(getView().getContext(),tracks.arrayList);
-                    tracks.addListener(()->
-                    {
-                        adapter.notifyDataSetChanged();
-                    });
-                    rv.setAdapter(adapter);
-                    api.searchAudio(tracks,editText.getText().toString(),0);
+                    tracks.arrayList.clear();
+                    API.getInstance().searchAudio(tracks,editText.getText().toString(),0);
+                    old_text = editText.getText().toString();
                     rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
                         @Override
                         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                             super.onScrollStateChanged(recyclerView, newState);
                             if(rv.canScrollVertically(1)==false)
                             {
-                                api.searchAudio(tracks,editText.getText().toString(),rv.getAdapter().getItemCount());
+                                API.getInstance().searchAudio(tracks,old_text,rv.getAdapter().getItemCount());
                             }
                         }
                     });
-                    old_text = editText.getText().toString();
                     return true;
                 }
                 else
                     {
-                        old_text = editText.getText().toString();
                     return false;
                 }
             }

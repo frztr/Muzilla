@@ -30,13 +30,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/wall_back_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="47.27dp"
         android:layout_marginBottom="46.18dp"
         android:layout_marginLeft="57.45dp"
@@ -44,15 +49,19 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_music_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="43.63dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/player_music_icon"
-                android:layout_width="277.81dp"
-                android:layout_height="277.81dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
                 android:src="@drawable/music_icon" />
         </androidx.cardview.widget.CardView>
 
@@ -60,88 +69,185 @@
             android:id="@+id/player_track_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19.36dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:maxLines="1"
             android:text="INFINITY"
             android:textAlignment="center"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:minHeight="56.36dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"
+            android:textColor="@color/color2_100"
+            android:textSize="28.27dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView_music_icon"
-            android:textSize="23.27dp"
-            android:layout_marginTop="24.36dp"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/cardView_music_icon" />
 
         <TextView
             android:id="@+id/player_track_musician"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14.36dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:maxLines="1"
             android:text="LXST CXNTURY"
             android:textAlignment="center"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:minHeight="56.36dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"
+            android:textColor="@color/color2_100"
+            android:textSize="23.18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player_track_name"
-            android:textSize="18.18dp"
-            android:layout_marginTop="24.36dp"
+
             />
+
         <LinearLayout
             android:id="@+id/player_seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/player_track_musician"
-            android:layout_marginTop="31.63dp"
+            android:layout_marginTop="21.63dp"
             android:orientation="vertical"
-            >
-         <SeekBar
-             android:id="@+id/player_seekbar_element"
-             android:layout_width="match_parent"
-             android:layout_height="19.54dp"
-             android:thumbTint="@color/color2_100"
-             android:progress="45"
-             android:progressDrawable="@drawable/seek_bar_drawable"
-             android:paddingTop="8.04dp"
-             android:paddingBottom="8.04dp"
-             >
+            app:layout_constraintTop_toBottomOf="@+id/player_track_musician">
 
-         </SeekBar>
-         <androidx.constraintlayout.widget.ConstraintLayout
-             android:id="@+id/player_durations"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             app:layout_constraintLeft_toLeftOf="@+id/player_seekbar"
-             app:layout_constraintRight_toRightOf="@+id/player_seekbar"
-             app:layout_constraintTop_toTopOf="@+id/player_seekbar_element"
-             android:layout_marginLeft="10dp"
-             android:layout_marginRight="14dp"
-             >
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 app:layout_constraintLeft_toLeftOf="@+id/player_durations"
-                 app:layout_constraintTop_toTopOf="@+id/player_durations"
-                 android:text="0:00"
-                 android:textColor="@color/color2_100"
-                 android:fontFamily="@font/roboto_black"
-                 android:textSize="14.54dp" />
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 app:layout_constraintRight_toRightOf="@+id/player_durations"
-                 app:layout_constraintTop_toTopOf="@+id/player_durations"
-                 android:text="2:22"
-                 android:textColor="@color/color2_100"
-                 android:fontFamily="@font/roboto_black"
-                 android:textSize="14.54dp"/>
-         </androidx.constraintlayout.widget.ConstraintLayout>
+            <SeekBar
+                android:id="@+id/player_seekbar_element"
+                android:layout_width="match_parent"
+                android:layout_height="19.54dp"
+                android:paddingTop="8.04dp"
+                android:paddingBottom="8.04dp"
+                android:progress="45"
+                android:progressDrawable="@drawable/seek_bar_drawable"
+                android:thumbTint="@color/color2_100">
+
+            </SeekBar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/player_durations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="18dp"
+                app:layout_constraintLeft_toLeftOf="@+id/player_seekbar"
+                app:layout_constraintRight_toRightOf="@+id/player_seekbar"
+                app:layout_constraintTop_toTopOf="@+id/player_seekbar_element">
+
+                <TextView
+                    android:id="@+id/current_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="0:00"
+                    android:textColor="@color/color2_100"
+                    android:textSize="17.54dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/player_durations"
+                    app:layout_constraintTop_toTopOf="@+id/player_durations" />
+
+                <TextView
+                    android:id="@+id/track_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="2:22"
+                    android:textColor="@color/color2_100"
+                    android:textSize="17.54dp"
+                    app:layout_constraintRight_toRightOf="@+id/player_durations"
+                    app:layout_constraintTop_toTopOf="@+id/player_durations" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/player_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24.36dp"
+            android:layout_weight="0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_seekbar">
+
+            <ImageButton
+                android:id="@+id/imageButtonPlayerPrev"
+                android:layout_width="48.5dp"
+                android:layout_height="48.5dp"
+                android:layout_marginRight="12.7dp"
+                android:background="@android:color/transparent"
+                android:onClick="Prev"
+                android:padding="7.125dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_skip_previous"
+                app:tint="@color/color2_100" />
+
+            <ImageButton
+                android:id="@+id/imageButtonPlayerPause"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:background="@drawable/button_back"
+                android:onClick="Pause"
+                android:padding="20dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_play__1_"
+                app:tint="@color/color2_100" />
+
+            <ImageButton
+                android:id="@+id/imageButtonPlayerNext"
+                android:layout_width="48.5dp"
+                android:layout_height="48.5dp"
+                android:layout_marginLeft="12.7dp"
+                android:background="@android:color/transparent"
+                android:onClick="Next"
+                android:padding="7.125dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_skip_next"
+                app:tint="@color/color2_100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34.54dp"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:paddingTop="5.09dp"
+            android:paddingBottom="5.09dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_buttons">
+
+            <ImageButton
+                android:id="@+id/loop_button"
+                android:layout_width="29.09dp"
+                android:layout_height="29.09dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="setLoop"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_repeat"
+                app:tint="@color/color2_100" />
+
+            <ImageButton
+                android:id="@+id/add_track_button"
+                android:layout_width="29.09dp"
+                android:layout_height="29.09dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="addTrack"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus"
+                app:tint="@color/color2_100" />
+
+            <ImageButton
+                android:id="@+id/shuffle_button"
+                android:layout_width="29.09dp"
+                android:layout_height="29.09dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="setShuffle"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_shuffle_variant"
+                app:tint="@color/color2_100" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

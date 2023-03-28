@@ -41,78 +41,106 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    public API API;
+public class MainActivity extends AppCompatActivity implements IPlayerActivity {
     SharedPreferences sp;
     ViewPager2 vp2;
-    public AudioPlayer AudioPlayer;
     Track last_track = null;
     ArrayList<Fragment> pages = new ArrayList<Fragment>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        InitializeApp();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setContentStructure();
         FullScreen();
         LoadWallpaper();
-        SliderAdapter sliderAdapter = new SliderAdapter(this);
-        sliderAdapter.setFragments(pages);
-        vp2 = findViewById(R.id.pageloader);
-        vp2.setAdapter(sliderAdapter);
-
-
-
-        MainActivity t = this;
-        LinearLayout ll = findViewById(R.id.linearLayout2);
-        ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(t,PlayerActivity.class);
-                t.startActivity(intent);
-
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
-            }
-        });
+        LoadPages();
 
     }
 
-    public boolean bound;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ViewUpdater viewUpdater = new ViewUpdater()
+        {
+            @Override
+            public void onPlayingStateChanged() {
+                PlayButtonChangeIcon((ImageButton)findViewById(R.id.imageButton2));
+            }
+
+            @Override
+            public void onTrackLoaded() {
+                setTrackonPlayer();
+            }
+
+            @Override
+            public void onCurrentTrackStateChanged() {
+                setPlayerBehavior();
+            }
+        };
+        AudioPlayer.getInstance().addUpdater(viewUpdater);
+        setTrackonPlayer();
+    }
+
+    public void Next(View v)
+    {
+        AudioPlayer.getInstance().Next();
+    }
+
+    public void Pause(View v)
+    {
+        if(AudioPlayer.getInstance().isPlaying())
+        {
+            AudioPlayer.getInstance().Pause();
+        }
+        else
+        {
+            AudioPlayer.getInstance().Play();
+        }
+    }
+
+    public void Prev(View v)
+    {
+        AudioPlayer.getInstance().Prev();
+    }
+
+    public void OpenPlayer(View view)
+    {
+        Intent intent = new Intent(this,PlayerActivity.class);
+        this.startActivity(intent);
+
+    }
+
+    public void MainPageLoad(View v)
+    {
+        vp2.setCurrentItem(0,true);
+    }
+    public void PopularPageLoad(View v)
+    {
+        vp2.setCurrentItem(1,true);
+    }
+    public void SearchPageLoad(View v)
+    {
+        vp2.setCurrentItem(3,true);
+    }
+    public void SettingsPageLoad(View v)
+    {
+        vp2.setCurrentItem(4,true);
+    }
 
     public void StartAudioService()
     {
-        Intent intent = new Intent(this,AudioPlayer.class);
+        Intent intent = new Intent(this,AudioNotificationService.class);
 
         ServiceConnection srv = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                Log.d("Console", "MainActivity onServiceConnected");
-                AudioPlayer = ((AudioPlayer.AudioBinder) iBinder).getService(API);
-
-                ((App) getApplicationContext()).ap = AudioPlayer;
-
-                AudioPlayer.addPlayingListener(()->
-                {
-                    PlayButtonChangeIcon((ImageButton)findViewById(R.id.imageButton2));
-                });
-
-                AudioPlayer.addOnTrackLoadedListener(()->
-                {
-                    setTrackonPlayer();
-                });
-
-                setTrackonPlayer();
-
-                AudioPlayer.addOnCurrentTrackStateChanged(()->
-                {
-                    setPlayerBehavior();
-                });
+                AudioNotificationService service = ((AudioNotificationService.AudioBinder) iBinder).getService();
             }
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-                Log.d("Console", "MainActivity onServiceDisconnected");
             }
         };
         bindService(intent,srv,0);
@@ -124,29 +152,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void InitializeApp()
+    private void LoadPages()
+    {
+        SliderAdapter sliderAdapter = new SliderAdapter(this);
+        sliderAdapter.setFragments(pages);
+        vp2 = findViewById(R.id.pageloader);
+        vp2.setAdapter(sliderAdapter);
+    }
+
+    private void setContentStructure()
     {
         sp = getSharedPreferences("Account",Context.MODE_PRIVATE);
         pages = new ArrayList<Fragment>();
         if(sp.getString("access_token","").length()!=0)
         {
-            API = new API(sp.getString("access_token", ""));
             StartAudioService();
-            API.getMyProfile(sp);
-            MainFragment mf = new MainFragment(API,Integer.parseInt(sp.getString("profileId","")));
-            pages.add(mf);
-            pages.add(new PopularFragment(API));
-            pages.add(new RecommendationFragment(API));
-            pages.add(new SearchFragment(API));
+            pages.add(new MainFragment());
+            pages.add(new PopularFragment());
+            pages.add(new RecommendationFragment());
+            pages.add(new SearchFragment());
         }
         SettingsFragment sf = new SettingsFragment();
         sf.setSharedPreferences(sp);
         pages.add(sf);
     }
 
-    public void PlayButtonChangeIcon(ImageView img)
+    private void PlayButtonChangeIcon(ImageView img)
     {
-        if(AudioPlayer.isPlaying()==true) {
+        if(AudioPlayer.getInstance().isPlaying()==true) {
             img.setImageResource(R.drawable.ic_pause__1_);
         }
         else
@@ -155,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void LoadWallpaper()
+    private void LoadWallpaper()
     {
         try {
             if (sp.getString("wall_uri", "").length() != 0) {
@@ -175,16 +208,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void FullScreen()
+    private void FullScreen()
     {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         View v = findViewById(R.id.cl1);
         v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    public void setTrackonPlayer()
+    private void setTrackonPlayer()
     {
-            Track track = AudioPlayer.getCurrentTrack();
+            Track track = AudioPlayer.getInstance().getCurrentTrack();
             if(track!=null) {
                 if (track.getImgUrl() != "") {
                     Picasso.get().load(track.getImgUrl()).into((ImageView) findViewById(R.id.imageView2));
@@ -198,10 +231,10 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    public void setPlayerBehavior()
+    private void setPlayerBehavior()
     {
         LinearLayout ll = (LinearLayout) findViewById(R.id.linearLayout2);
-        if(AudioPlayer.getCurrentTrack()==null && last_track != null)
+        if(AudioPlayer.getInstance().getCurrentTrack()==null && last_track != null)
         {
             for(int i = 0;i<ll.getChildCount();i++)
             {
@@ -244,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
             anim.setDuration(300);
             anim.start();
         }
-        if(AudioPlayer.getCurrentTrack()!=null && last_track == null)
+        if(AudioPlayer.getInstance().getCurrentTrack()!=null && last_track == null)
         {
             for(int i = 0;i<ll.getChildCount();i++)
             {
@@ -290,52 +323,17 @@ public class MainActivity extends AppCompatActivity {
             anim.start();
 
         }
-        last_track = AudioPlayer.getCurrentTrack();
-    }
-
-
-    public void MainPageLoad(View v)
-    {
-          vp2.setCurrentItem(0,true);
-    }
-    public void PopularPageLoad(View v)
-    {
-        vp2.setCurrentItem(1,true);
-    }
-    public void SearchPageLoad(View v)
-    {
-        vp2.setCurrentItem(3,true);
-    }
-    public void SettingsPageLoad(View v)
-    {
-        vp2.setCurrentItem(4,true);
-    }
-    public void Next(View v)
-    {
-        AudioPlayer.Next();
-    }
-
-    @SuppressLint("ResourceType")
-    public void Pause(View v)
-    {
-        if(AudioPlayer.isPlaying())
-        {
-            AudioPlayer.Pause();
-        }
-        else
-            {
-                AudioPlayer.Play();
-            }
-    }
-
-    public void Prev(View v)
-    {
-        AudioPlayer.Prev();
+        last_track = AudioPlayer.getInstance().getCurrentTrack();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         FullScreen();
+    }
+
+    @Override
+    public Track getLastTrack() {
+        return last_track;
     }
 }

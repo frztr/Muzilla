@@ -16,14 +16,13 @@ import java.util.ArrayList;
 
 public class RecommendationFragment extends Fragment {
 
-    private API api;
     private ArrayListExtended<Track> tracks;
     private TrackAdapter adapter;
 
-    public RecommendationFragment(API api) {
-        this.api = api;
+    public RecommendationFragment() {
         tracks = new ArrayListExtended<Track>();
-        api.getMyRecommendations(tracks,0);
+        API.getInstance().getMyRecommendations(tracks,0);
+        API.getInstance().addPlaylistListener(tracks);
     }
 
     @Override
@@ -45,6 +44,10 @@ public class RecommendationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LoadRecommendations();
+    }
+    private void LoadRecommendations()
+    {
         RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_recommendations);
         rv.setAdapter(adapter);
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -53,7 +56,7 @@ public class RecommendationFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(rv.canScrollVertically(1)==false)
                 {
-                    api.getMyRecommendations(tracks,rv.getAdapter().getItemCount());
+                    API.getInstance().getMyRecommendations(tracks,rv.getAdapter().getItemCount());
                 }
             }
         });

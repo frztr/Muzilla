@@ -9,8 +9,16 @@
     app:cardElevation="0dp"
     android:layout_marginRight="9.09dp"
     android:clickable="true"
-    android:foreground="@drawable/track_back"
+    android:foreground="@color/item_back"
     >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/playlist_clicked_back"
+        android:background="@color/color1_100"
+        android:visibility="invisible">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

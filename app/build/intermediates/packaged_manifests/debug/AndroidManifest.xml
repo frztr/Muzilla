@@ -25,23 +25,28 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <activity
+            android:name="com.example.muzilla.PlaylistActivity"
+            android:exported="true" />
+
         <service
-            android:name="com.example.muzilla.AudioPlayer"
+            android:name="com.example.muzilla.AudioNotificationService"
             android:enabled="true"
             android:exported="true"
-            android:foregroundServiceType="mediaPlayback" >
-        </service>
+            android:foregroundServiceType="mediaPlayback" />
 
         <receiver android:name="com.example.muzilla.PlayIntent" />
         <receiver android:name="com.example.muzilla.PreviousIntent" />
         <receiver android:name="com.example.muzilla.NextIntent" />
+        <receiver android:name="com.example.muzilla.StopServiceIntent" />
 
         <activity
             android:name="com.example.muzilla.PlayerActivity"
             android:exported="true" />
         <activity
             android:name="com.example.muzilla.MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

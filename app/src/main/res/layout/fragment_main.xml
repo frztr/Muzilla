@@ -7,33 +7,51 @@
     tools:context=".MainFragment"
     android:background="@android:color/transparent">
 
-    <TextView
-        android:id="@+id/textView3"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/myaudio_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="83.6dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="29dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="29dp"
-        android:fontFamily="@font/roboto_black"
-        android:gravity="center_vertical|left"
-        android:text="Мои аудиозаписи"
-        android:textColor="@color/color2_100"
-        android:textFontWeight="900"
-        android:textSize="32.7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        android:layout_marginTop="25.09dp"
+        app:cardBackgroundColor="@color/cardview_shadow_start_color"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="13dp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <com.example.muzilla.CustomEditText
+            android:id="@+id/myaudio_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingTop="14.54dp"
+            android:paddingBottom="14.54dp"
+            android:paddingLeft="14.54dp"
+            android:paddingRight="14.54dp"
+            android:hint="Поиск"
+            android:textColor="@color/color2_100"
+            android:textSize="23.27dp"
+            android:textColorHint="@color/color2_100"
+            android:fontFamily="@font/roboto_bold"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            >
+        </com.example.muzilla.CustomEditText>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlists_list"
+        android:layout_marginTop="18.91dp"
         android:layout_marginLeft="29dp"
         android:layout_marginRight="29dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/myaudio_input_layout"
         tools:listitem="@layout/list_item"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         />
 
     <androidx.recyclerview.widget.RecyclerView

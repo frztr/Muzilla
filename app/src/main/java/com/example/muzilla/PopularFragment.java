@@ -17,13 +17,12 @@ import java.util.ArrayList;
 public class PopularFragment extends Fragment {
 
 
-    private API api;
     private ArrayListExtended<Track> tracks;
     private TrackAdapter adapter;
-    public PopularFragment(API api) {
-        this.api = api;
+    public PopularFragment() {
         tracks = new ArrayListExtended<Track>();
-        api.getPopularAudio(tracks,0);
+        API.getInstance().getPopularAudio(tracks,0);
+        API.getInstance().addPlaylistListener(tracks);
     }
 
     @Override
@@ -36,6 +35,7 @@ public class PopularFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 
+
     }
 
     @Override
@@ -45,6 +45,11 @@ public class PopularFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        LoadPopular();
+    }
+
+    private void LoadPopular()
+    {
         RecyclerView rv = (RecyclerView) getView().findViewById(R.id.tracks_list_popular);
         rv.setAdapter(adapter);
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -53,7 +58,7 @@ public class PopularFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(rv.canScrollVertically(1)==false)
                 {
-                    api.getPopularAudio(tracks,rv.getAdapter().getItemCount());
+                    API.getInstance().getPopularAudio(tracks,rv.getAdapter().getItemCount());
                 }
             }
         });

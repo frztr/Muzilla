@@ -1,23 +1,35 @@
 [
     {
-        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\font_roboto_bold.ttf.flat",
-        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\font\\roboto_bold.ttf"
-    },
-    {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_music_circle.xml.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_music_circle.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\font_roboto_bold.ttf.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\font\\roboto_bold.ttf"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_shuffle_variant.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_shuffle_variant.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_arrow_back_24px.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_arrow_back_24px.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_repeat.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_repeat.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -26,6 +38,14 @@
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\font_roboto_blackitalic.ttf.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\font\\roboto_blackitalic.ttf"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_playlist.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\activity_playlist.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_close.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_close.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_popular.xml.flat",
@@ -50,6 +70,10 @@
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\font_roboto_italic.ttf.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\font\\roboto_italic.ttf"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_plus.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_plus.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -184,6 +208,10 @@
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_check.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\ic_check.xml"
+    },
+    {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\drawable_seek_bar_progress.xml.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\drawable\\seek_bar_progress.xml"
     },
@@ -222,6 +250,10 @@
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\anim_stay.xml.flat",
+        "source": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\src\\main\\res\\anim\\stay.xml"
     },
     {
         "merged": "C:\\Users\\mrzak\\AndroidStudioProjects\\MuZilla\\app\\build\\intermediates\\merged_res\\debug\\font_roboto_medium.ttf.flat",

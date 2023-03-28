@@ -67,11 +67,11 @@ public class TrackAdapter extends RecyclerView.Adapter {
         Integer minutes = track.getDuration()/60;
         Integer secs = track.getDuration()%60;
         viewHolder.durationView.setText(String.format("%d:%02d",minutes,secs));
-        viewHolder.track_id = track.getId();
+        viewHolder.track_content_id = track.getContentId();
 
-        if(((MainActivity) viewHolder.trackAdapter.context).AudioPlayer.getCurrentTrack()!=null){
+        if(AudioPlayer.getInstance().getCurrentTrack()!=null){
 
-            if (track.getId().equals(((MainActivity) viewHolder.trackAdapter.context).AudioPlayer.getCurrentTrack().getId())) {
+            if (track.getContentId().equals(AudioPlayer.getInstance().getCurrentTrack().getContentId())) {
                 viewHolder.track_item_wall.setVisibility(View.VISIBLE);
             } else {
                 viewHolder.track_item_wall.setVisibility(View.INVISIBLE);
@@ -89,17 +89,17 @@ public class TrackAdapter extends RecyclerView.Adapter {
         final TextView nameView, musicianView,durationView;
         final CardView track_item;
         final ConstraintLayout track_item_wall;
-        String track_id;
+        String track_content_id;
         TrackAdapter trackAdapter;
 
         public void Update(View view)
         {
-            if(((MainActivity)trackAdapter.context).AudioPlayer.getCurrentTrack()!=null)
+            if(AudioPlayer.getInstance().getCurrentTrack()!=null)
             {
                 if(view.isAttachedToWindow()) {
-                    if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id) {
-                        if(((MainActivity) trackAdapter.context).last_track != null) {
-                            if (((MainActivity) trackAdapter.context).last_track.getId() != track_id) {
+                    if (AudioPlayer.getInstance().getCurrentTrack().getContentId() == track_content_id) {
+                        if(((IPlayerActivity) trackAdapter.context).getLastTrack() != null) {
+                            if (((IPlayerActivity) trackAdapter.context).getLastTrack().getContentId() != track_content_id) {
                                 Animator animator = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, 0f, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2));
                                 animator.setDuration(300);
                                 animator.setInterpolator(new AccelerateInterpolator());
@@ -149,7 +149,7 @@ public class TrackAdapter extends RecyclerView.Adapter {
                 }
                 else
                 {
-                    if (((MainActivity) trackAdapter.context).AudioPlayer.getCurrentTrack().getId() == track_id)
+                    if (AudioPlayer.getInstance().getCurrentTrack().getContentId() == track_content_id)
                     {
                         track_item_wall.setVisibility(View.VISIBLE);
                     }
@@ -172,80 +172,88 @@ public class TrackAdapter extends RecyclerView.Adapter {
             track_item = view.findViewById(R.id.track_item);
             track_item_wall = view.findViewById(R.id.track_item_wall);
 
-
-
-            ((MainActivity)trackAdapter.context).AudioPlayer.addOnTrackLoadedListener(()->
+            ViewUpdater viewUpdater = new ViewUpdater()
             {
-                Update(view);
-            });
+                @Override
+                public void onTrackLoaded() {
+                    Update(view);
+                }
 
-            ((MainActivity)trackAdapter.context).AudioPlayer.addOnCurrentTrackStateChanged(()->
-            {
-                if(((MainActivity)trackAdapter.context).AudioPlayer.getCurrentTrack()==null)
-                {
-                    if (track_item_wall.getVisibility() == View.VISIBLE) {
+                @Override
+                public void onCurrentTrackStateChanged() {
+                    if(AudioPlayer.getInstance().getCurrentTrack()==null)
+                    {
+                        if (track_item_wall.getVisibility() == View.VISIBLE) {
 
-                        if (view.isAttachedToWindow()) {
-                            Animator animator2 = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2), 0f);
-                            animator2.setDuration(300);
-                            animator2.setInterpolator(new AccelerateInterpolator());
-                            animator2.addListener(new Animator.AnimatorListener() {
-                                @Override
-                                public void onAnimationStart(Animator animator) {
+                            if (view.isAttachedToWindow()) {
+                                Animator animator2 = ViewAnimationUtils.createCircularReveal(track_item_wall, 0, track_item_wall.getHeight() / 2, (float) Math.hypot(track_item_wall.getWidth(), track_item_wall.getHeight() / 2), 0f);
+                                animator2.setDuration(300);
+                                animator2.setInterpolator(new AccelerateInterpolator());
+                                animator2.addListener(new Animator.AnimatorListener() {
+                                    @Override
+                                    public void onAnimationStart(Animator animator) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onAnimationEnd(Animator animator) {
-                                    track_item_wall.setVisibility(View.INVISIBLE);
-                                }
+                                    @Override
+                                    public void onAnimationEnd(Animator animator) {
+                                        track_item_wall.setVisibility(View.INVISIBLE);
+                                    }
 
-                                @Override
-                                public void onAnimationCancel(Animator animator) {
+                                    @Override
+                                    public void onAnimationCancel(Animator animator) {
 
-                                }
+                                    }
 
-                                @Override
-                                public void onAnimationRepeat(Animator animator) {
+                                    @Override
+                                    public void onAnimationRepeat(Animator animator) {
 
-                                }
-                            });
-                            animator2.start();
-                        }
+                                    }
+                                });
+                                animator2.start();
+                            }
+                            else
+                            {
+                                track_item_wall.setVisibility(View.INVISIBLE);
+                            }
+
                         } else
                         {
-                        track_item_wall.setVisibility(View.INVISIBLE);
-                        }
-                }
-            });
 
+                        }
+                    }
+                }
+            };
+            AudioPlayer.getInstance().addUpdater(viewUpdater);
 
             track_item.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("ResourceAsColor")
                 @Override
                 public void onClick(View view) {
 
-                    AudioPlayer ap = ((MainActivity) trackAdapter.context).AudioPlayer;
-                    if(ap.getCurrentTrack()!=null) {
-                        if (ap.getCurrentTrack().getId().equals(trackAdapter.tracks.get(getAdapterPosition()).getId())) {
-                            if (ap.isPlaying()) {
-                                ap.Pause();
+                    if(AudioPlayer.getInstance().getCurrentTrack()!=null) {
+                        if (AudioPlayer.getInstance().getCurrentTrack().getContentId().equals(trackAdapter.tracks.get(getAdapterPosition()).getContentId())) {
+                            if (AudioPlayer.getInstance().isPlaying()) {
+                                AudioPlayer.getInstance().Pause();
                             } else {
-                                ap.Play();
+                                AudioPlayer.getInstance().Play();
                             }
                         } else {
-                            if (ap.getPlaylist() != trackAdapter.tracks) {
-                                ap.setPlaylist(trackAdapter.tracks);
-                                ap.Play(getAdapterPosition());
+                            if (!AudioPlayer.getInstance().getOriginalPlaylist().equals(trackAdapter.tracks))
+                            {
+                                AudioPlayer.getInstance().setPlaylist(trackAdapter.tracks);
+                                AudioPlayer.getInstance().setShuffle(false);
+                                AudioPlayer.getInstance().Play(getAdapterPosition());
                             } else {
-                                ap.Play(getAdapterPosition());
+                                AudioPlayer.getInstance().Play(getAdapterPosition());
                             }
                         }
                     }
                     else
                     {
-                            ap.setPlaylist(trackAdapter.tracks);
-                            ap.Play(getAdapterPosition());
+                        AudioPlayer.getInstance().setPlaylist(trackAdapter.tracks);
+                        AudioPlayer.getInstance().setShuffle(false);
+                        AudioPlayer.getInstance().Play(getAdapterPosition());
                     }
                 }
             });

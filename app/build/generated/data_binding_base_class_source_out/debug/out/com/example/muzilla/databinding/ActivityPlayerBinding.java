@@ -4,6 +4,7 @@ package com.example.muzilla.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -24,10 +25,31 @@ public final class ActivityPlayerBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final ImageButton addTrackButton;
+
+  @NonNull
   public final CardView cardViewMusicIcon;
 
   @NonNull
   public final ConstraintLayout cl2;
+
+  @NonNull
+  public final TextView currentDuration;
+
+  @NonNull
+  public final ImageButton imageButtonPlayerNext;
+
+  @NonNull
+  public final ImageButton imageButtonPlayerPause;
+
+  @NonNull
+  public final ImageButton imageButtonPlayerPrev;
+
+  @NonNull
+  public final ImageButton loopButton;
+
+  @NonNull
+  public final LinearLayout playerButtons;
 
   @NonNull
   public final ConstraintLayout playerDurations;
@@ -48,23 +70,42 @@ public final class ActivityPlayerBinding implements ViewBinding {
   public final TextView playerTrackName;
 
   @NonNull
+  public final ImageButton shuffleButton;
+
+  @NonNull
+  public final TextView trackDuration;
+
+  @NonNull
   public final ImageView wallBackPlayer;
 
   private ActivityPlayerBinding(@NonNull ConstraintLayout rootView,
-      @NonNull CardView cardViewMusicIcon, @NonNull ConstraintLayout cl2,
-      @NonNull ConstraintLayout playerDurations, @NonNull ImageView playerMusicIcon,
-      @NonNull LinearLayout playerSeekbar, @NonNull SeekBar playerSeekbarElement,
-      @NonNull TextView playerTrackMusician, @NonNull TextView playerTrackName,
-      @NonNull ImageView wallBackPlayer) {
+      @NonNull ImageButton addTrackButton, @NonNull CardView cardViewMusicIcon,
+      @NonNull ConstraintLayout cl2, @NonNull TextView currentDuration,
+      @NonNull ImageButton imageButtonPlayerNext, @NonNull ImageButton imageButtonPlayerPause,
+      @NonNull ImageButton imageButtonPlayerPrev, @NonNull ImageButton loopButton,
+      @NonNull LinearLayout playerButtons, @NonNull ConstraintLayout playerDurations,
+      @NonNull ImageView playerMusicIcon, @NonNull LinearLayout playerSeekbar,
+      @NonNull SeekBar playerSeekbarElement, @NonNull TextView playerTrackMusician,
+      @NonNull TextView playerTrackName, @NonNull ImageButton shuffleButton,
+      @NonNull TextView trackDuration, @NonNull ImageView wallBackPlayer) {
     this.rootView = rootView;
+    this.addTrackButton = addTrackButton;
     this.cardViewMusicIcon = cardViewMusicIcon;
     this.cl2 = cl2;
+    this.currentDuration = currentDuration;
+    this.imageButtonPlayerNext = imageButtonPlayerNext;
+    this.imageButtonPlayerPause = imageButtonPlayerPause;
+    this.imageButtonPlayerPrev = imageButtonPlayerPrev;
+    this.loopButton = loopButton;
+    this.playerButtons = playerButtons;
     this.playerDurations = playerDurations;
     this.playerMusicIcon = playerMusicIcon;
     this.playerSeekbar = playerSeekbar;
     this.playerSeekbarElement = playerSeekbarElement;
     this.playerTrackMusician = playerTrackMusician;
     this.playerTrackName = playerTrackName;
+    this.shuffleButton = shuffleButton;
+    this.trackDuration = trackDuration;
     this.wallBackPlayer = wallBackPlayer;
   }
 
@@ -95,6 +136,12 @@ public final class ActivityPlayerBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.add_track_button;
+      ImageButton addTrackButton = ViewBindings.findChildViewById(rootView, id);
+      if (addTrackButton == null) {
+        break missingId;
+      }
+
       id = R.id.cardView_music_icon;
       CardView cardViewMusicIcon = ViewBindings.findChildViewById(rootView, id);
       if (cardViewMusicIcon == null) {
@@ -102,6 +149,42 @@ public final class ActivityPlayerBinding implements ViewBinding {
       }
 
       ConstraintLayout cl2 = (ConstraintLayout) rootView;
+
+      id = R.id.current_duration;
+      TextView currentDuration = ViewBindings.findChildViewById(rootView, id);
+      if (currentDuration == null) {
+        break missingId;
+      }
+
+      id = R.id.imageButtonPlayerNext;
+      ImageButton imageButtonPlayerNext = ViewBindings.findChildViewById(rootView, id);
+      if (imageButtonPlayerNext == null) {
+        break missingId;
+      }
+
+      id = R.id.imageButtonPlayerPause;
+      ImageButton imageButtonPlayerPause = ViewBindings.findChildViewById(rootView, id);
+      if (imageButtonPlayerPause == null) {
+        break missingId;
+      }
+
+      id = R.id.imageButtonPlayerPrev;
+      ImageButton imageButtonPlayerPrev = ViewBindings.findChildViewById(rootView, id);
+      if (imageButtonPlayerPrev == null) {
+        break missingId;
+      }
+
+      id = R.id.loop_button;
+      ImageButton loopButton = ViewBindings.findChildViewById(rootView, id);
+      if (loopButton == null) {
+        break missingId;
+      }
+
+      id = R.id.player_buttons;
+      LinearLayout playerButtons = ViewBindings.findChildViewById(rootView, id);
+      if (playerButtons == null) {
+        break missingId;
+      }
 
       id = R.id.player_durations;
       ConstraintLayout playerDurations = ViewBindings.findChildViewById(rootView, id);
@@ -139,15 +222,29 @@ public final class ActivityPlayerBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.shuffle_button;
+      ImageButton shuffleButton = ViewBindings.findChildViewById(rootView, id);
+      if (shuffleButton == null) {
+        break missingId;
+      }
+
+      id = R.id.track_duration;
+      TextView trackDuration = ViewBindings.findChildViewById(rootView, id);
+      if (trackDuration == null) {
+        break missingId;
+      }
+
       id = R.id.wall_back_player;
       ImageView wallBackPlayer = ViewBindings.findChildViewById(rootView, id);
       if (wallBackPlayer == null) {
         break missingId;
       }
 
-      return new ActivityPlayerBinding((ConstraintLayout) rootView, cardViewMusicIcon, cl2,
-          playerDurations, playerMusicIcon, playerSeekbar, playerSeekbarElement,
-          playerTrackMusician, playerTrackName, wallBackPlayer);
+      return new ActivityPlayerBinding((ConstraintLayout) rootView, addTrackButton,
+          cardViewMusicIcon, cl2, currentDuration, imageButtonPlayerNext, imageButtonPlayerPause,
+          imageButtonPlayerPrev, loopButton, playerButtons, playerDurations, playerMusicIcon,
+          playerSeekbar, playerSeekbarElement, playerTrackMusician, playerTrackName, shuffleButton,
+          trackDuration, wallBackPlayer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

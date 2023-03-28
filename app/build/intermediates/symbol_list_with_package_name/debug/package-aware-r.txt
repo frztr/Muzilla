@@ -37,6 +37,7 @@ anim nav_default_pop_enter_anim
 anim nav_default_pop_exit_anim
 anim slide_in_up
 anim slide_out_up
+anim stay
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -1836,7 +1837,10 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable ic_arrow_back_24px
+drawable ic_check
 drawable ic_clock_black_24dp
+drawable ic_close
 drawable ic_cog
 drawable ic_home
 drawable ic_keyboard_black_24dp
@@ -1850,6 +1854,9 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_music_circle
 drawable ic_pause__1_
 drawable ic_play__1_
+drawable ic_plus
+drawable ic_repeat
+drawable ic_shuffle_variant
 drawable ic_skip_next
 drawable ic_skip_previous
 drawable ic_star__1_
@@ -1989,6 +1996,8 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_playlist
+id add_track_button
 id alertTitle
 id aligned
 id all
@@ -2040,6 +2049,7 @@ id chronometer
 id circle_center
 id cl1
 id cl2
+id cl3
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -2058,6 +2068,7 @@ id coordinator
 id cos
 id counterclockwise
 id currentState
+id current_duration
 id custom
 id customPanel
 id cut
@@ -2141,10 +2152,15 @@ id image
 id imageButton
 id imageButton2
 id imageButton3
+id imageButton4
 id imageButton5
 id imageButton6
 id imageButton7
 id imageButton8
+id imageButtonPlayerNext
+id imageButtonPlayerPause
+id imageButtonPlayerPrev
+id imageButtonPlaylistPlay
 id imageView2
 id immediateStop
 id included
@@ -2171,8 +2187,10 @@ id line3
 id linear
 id linearLayout
 id linearLayout2
+id linearLayout3
 id listMode
 id list_item
+id loop_button
 id masked
 id match_constraint
 id match_parent
@@ -2230,6 +2248,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id myaudio_input
+id myaudio_input_layout
 id nav_controller_view_tag
 id nav_graph
 id nav_host_fragment_container
@@ -2268,15 +2288,21 @@ id pathRelative
 id peekHeight
 id percent
 id pin
+id player_buttons
 id player_durations
 id player_music_icon
 id player_seekbar
 id player_seekbar_element
 id player_track_musician
 id player_track_name
+id playlist_clicked_back
+id playlist_img_iv
 id playlist_logo
 id playlist_musician
+id playlist_musician_tv
 id playlist_name
+id playlist_name_tv
+id playlist_rv
 id playlists_list
 id populartitle
 id position
@@ -2326,6 +2352,8 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id shuffle_button
+id shuffle_playlist
 id sin
 id skipCollapsed
 id skipped
@@ -2386,7 +2414,6 @@ id textStart
 id textTop
 id textView
 id textView2
-id textView3
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2404,6 +2431,7 @@ id toggle
 id top
 id topPanel
 id touch_outside
+id track_duration
 id track_item
 id track_item_wall
 id track_logo
@@ -2435,6 +2463,7 @@ id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
 id wall_back_player
+id wall_back_playlist
 id west
 id withText
 id withinBounds
@@ -2514,6 +2543,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout activity_player
+layout activity_playlist
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

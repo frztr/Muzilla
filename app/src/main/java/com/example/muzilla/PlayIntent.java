@@ -8,7 +8,7 @@ import android.widget.Toast;
 public class PlayIntent extends BroadcastReceiver {
     public void onReceive(Context context, android.content.Intent intent) {
 
-        AudioPlayer ap = ((App)context.getApplicationContext()).ap;
+        AudioPlayer ap = AudioPlayer.getInstance();
         if(ap.isPlaying()) {
             ap.Pause();
         }

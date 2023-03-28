@@ -53,33 +53,16 @@ public class SettingsFragment extends Fragment implements IBaseFragment {
             edt.setText(sp.getString("access_token",""));
         }
 
-        edt.addTextChangedListener(new TextWatcher() {
+        edt.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String str = charSequence.toString();
-                edt.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                        if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                            sp.edit().putString("access_token", str).commit();
-                            Intent intent = getActivity().getIntent();
-                            getActivity().finish();
-                            startActivity(intent);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    sp.edit().putString("access_token", edt.getText().toString()).commit();
+                    API.getInstance().setToken(edt.getText().toString());
+                    API.getInstance().getMyProfile(sp,getActivity());
+                    return true;
+                }
+                return false;
             }
         });
     }

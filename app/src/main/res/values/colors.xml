@@ -12,7 +12,7 @@
     <color name="color2_40">#66E7CEFF</color>
     <color name="color2_66">#AAE7CEFF</color>
     <color name="color2_100">#E7CEFF</color>
-    <color name="color1_100">#8004f8</color>
-    <color name="color1_0">#008004f8</color>
+    <color name="color1_100">#B47200A8</color>
+    <color name="color1_0">#007200A8</color>
     <color name="item_back">#33000000</color>
 </resources>
