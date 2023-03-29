@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name="com.example.muzilla.App"
@@ -39,6 +41,15 @@
         <receiver android:name="com.example.muzilla.PreviousIntent" />
         <receiver android:name="com.example.muzilla.NextIntent" />
         <receiver android:name="com.example.muzilla.StopServiceIntent" />
+        <receiver
+            android:name="com.example.muzilla.PhoneStateBroadcastReceiver"
+            android:exported="false"
+            android:permission="android.permission.READ_PHONE_STATE" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="com.example.muzilla.PlayerActivity"

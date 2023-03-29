@@ -11,127 +11,151 @@
 9-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:5:5-67
-11-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:5:22-64
+11-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:6:5-67
+11-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:6:22-64
 12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-12-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:6:5-76
-12-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:6:22-73
+12-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:7:5-76
+12-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:7:22-73
 13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-13-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:7:5-80
-13-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:7:22-77
+13-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:8:5-80
+13-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:8:22-77
 14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-14-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:8:5-81
-14-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:8:22-78
+14-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:9:5-81
+14-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:9:22-78
 15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-15-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:9:5-77
-15-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:9:22-74
-16
-17    <application
-17-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:11:5-46:19
-18        android:name="com.example.muzilla.App"
-18-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:12:9-28
-19        android:allowBackup="true"
-19-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:13:9-35
-20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.7.0] C:\Users\mrzak\.gradle\caches\transforms-3\376792b261fdcbfd86757f02ea12377d\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
-21        android:debuggable="true"
-22        android:icon="@mipmap/ic_launcher"
-22-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:14:9-43
-23        android:label="@string/app_name"
-23-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:15:9-41
-24        android:roundIcon="@mipmap/ic_launcher_round"
-24-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:16:9-54
-25        android:supportsRtl="true"
-25-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:17:9-35
-26        android:testOnly="true"
-27        android:theme="@style/Theme.AppCompat.NoActionBar" >
-27-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:18:9-59
-28        <activity
-28-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:19:9-21:39
-29            android:name="com.example.muzilla.PlaylistActivity"
-29-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:20:13-45
-30            android:exported="true" />
-30-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:21:13-36
-31
-32        <service
-32-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:23:9-27:69
-33            android:name="com.example.muzilla.AudioNotificationService"
-33-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:24:13-53
-34            android:enabled="true"
-34-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:25:13-35
-35            android:exported="true"
-35-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:26:13-36
-36            android:foregroundServiceType="mediaPlayback" />
-36-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:27:13-58
-37
-38        <receiver android:name="com.example.muzilla.PlayIntent" />
-38-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:29:9-48
-38-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:29:19-45
-39        <receiver android:name="com.example.muzilla.PreviousIntent" />
-39-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:30:9-52
-39-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:30:19-49
-40        <receiver android:name="com.example.muzilla.NextIntent" />
-40-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:31:9-48
-40-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:31:19-45
-41        <receiver android:name="com.example.muzilla.StopServiceIntent" />
-41-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:32:9-55
-41-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:32:19-52
-42
-43        <activity
-43-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:33:9-35:39
-44            android:name="com.example.muzilla.PlayerActivity"
-44-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:34:13-43
-45            android:exported="true" />
-45-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:35:13-36
-46        <activity
-46-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:36:9-45:20
-47            android:name="com.example.muzilla.MainActivity"
-47-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:37:13-41
-48            android:exported="true"
-48-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:38:13-36
-49            android:windowSoftInputMode="adjustPan" >
-49-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:39:13-52
-50            <intent-filter>
-50-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:40:13-44:29
-51                <action android:name="android.intent.action.MAIN" />
-51-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:41:17-69
-51-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:41:25-66
-52
-53                <category android:name="android.intent.category.LAUNCHER" />
-53-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:43:17-77
-53-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:43:27-74
-54            </intent-filter>
-55        </activity>
-56
-57        <provider
-57-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:8:9-11:40
-58            android:name="com.squareup.picasso.PicassoProvider"
-58-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:9:13-64
-59            android:authorities="com.example.muzilla.com.squareup.picasso"
-59-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:10:13-72
-60            android:exported="false" />
-60-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:11:13-37
-61        <provider
-61-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
-62            android:name="androidx.startup.InitializationProvider"
-62-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
-63            android:authorities="com.example.muzilla.androidx-startup"
-63-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
-64            android:exported="false" >
-64-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
-65            <meta-data
-65-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
-66                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-66-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
-67                android:value="androidx.startup" />
-67-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
-68            <meta-data
-68-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
-69                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-69-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
-70                android:value="androidx.startup" />
-70-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
-71        </provider>
-72    </application>
-73
-74</manifest>
+15-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:10:5-77
+15-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:10:22-74
+16    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+16-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:11:5-85
+16-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:11:22-82
+17    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+17-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:12:5-74
+17-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:12:22-72
+18
+19    <application
+19-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:14:5-60:19
+20        android:name="com.example.muzilla.App"
+20-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:15:9-28
+21        android:allowBackup="true"
+21-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:16:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.7.0] C:\Users\mrzak\.gradle\caches\transforms-3\376792b261fdcbfd86757f02ea12377d\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+23        android:debuggable="true"
+24        android:icon="@mipmap/ic_launcher"
+24-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:17:9-43
+25        android:label="@string/app_name"
+25-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:18:9-41
+26        android:roundIcon="@mipmap/ic_launcher_round"
+26-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:19:9-54
+27        android:supportsRtl="true"
+27-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:20:9-35
+28        android:testOnly="true"
+29        android:theme="@style/Theme.AppCompat.NoActionBar" >
+29-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:21:9-59
+30        <activity
+30-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:23:9-25:39
+31            android:name="com.example.muzilla.PlaylistActivity"
+31-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:24:13-45
+32            android:exported="true" />
+32-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:25:13-36
+33
+34        <service
+34-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:27:9-31:69
+35            android:name="com.example.muzilla.AudioNotificationService"
+35-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:28:13-53
+36            android:enabled="true"
+36-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:29:13-35
+37            android:exported="true"
+37-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:30:13-36
+38            android:foregroundServiceType="mediaPlayback" />
+38-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:31:13-58
+39
+40        <receiver android:name="com.example.muzilla.PlayIntent" />
+40-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:33:9-48
+40-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:33:19-45
+41        <receiver android:name="com.example.muzilla.PreviousIntent" />
+41-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:34:9-52
+41-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:34:19-49
+42        <receiver android:name="com.example.muzilla.NextIntent" />
+42-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:35:9-48
+42-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:35:19-45
+43        <receiver android:name="com.example.muzilla.StopServiceIntent" />
+43-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:36:9-55
+43-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:36:19-52
+44        <receiver
+44-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:37:9-45:20
+45            android:name="com.example.muzilla.PhoneStateBroadcastReceiver"
+45-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:38:13-56
+46            android:exported="false"
+46-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:40:13-37
+47            android:permission="android.permission.READ_PHONE_STATE" >
+47-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:39:13-69
+48            <intent-filter>
+48-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:41:13-44:29
+49                <action android:name="android.intent.action.PHONE_STATE" />
+49-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:42:17-76
+49-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:42:25-73
+50                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+50-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:43:17-82
+50-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:43:25-79
+51            </intent-filter>
+52        </receiver>
+53
+54        <activity
+54-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:46:9-48:39
+55            android:name="com.example.muzilla.PlayerActivity"
+55-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:47:13-43
+56            android:exported="true" />
+56-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:48:13-36
+57        <activity
+57-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:49:9-59:20
+58            android:name="com.example.muzilla.MainActivity"
+58-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:50:13-41
+59            android:exported="true"
+59-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:51:13-36
+60            android:windowSoftInputMode="adjustPan" >
+60-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:52:13-52
+61            <intent-filter>
+61-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:53:13-57:29
+62                <action android:name="android.intent.action.MAIN" />
+62-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:54:17-69
+62-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:54:25-66
+63
+64                <category android:name="android.intent.category.LAUNCHER" />
+64-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:56:17-77
+64-->C:\Users\mrzak\AndroidStudioProjects\MuZilla\app\src\main\AndroidManifest.xml:56:27-74
+65            </intent-filter>
+66        </activity>
+67
+68        <provider
+68-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:8:9-11:40
+69            android:name="com.squareup.picasso.PicassoProvider"
+69-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:9:13-64
+70            android:authorities="com.example.muzilla.com.squareup.picasso"
+70-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:10:13-72
+71            android:exported="false" />
+71-->[com.squareup.picasso:picasso:2.8] C:\Users\mrzak\.gradle\caches\transforms-3\ce8bb71e53d8008ee417cd5c2805edb0\transformed\jetified-picasso-2.8\AndroidManifest.xml:11:13-37
+72        <provider
+72-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+73            android:name="androidx.startup.InitializationProvider"
+73-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+74            android:authorities="com.example.muzilla.androidx-startup"
+74-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+75            android:exported="false" >
+75-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+76            <meta-data
+76-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+77                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+77-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+78                android:value="androidx.startup" />
+78-->[androidx.emoji2:emoji2:1.0.0] C:\Users\mrzak\.gradle\caches\transforms-3\8b7c53cedc320aafa8740bc99100eae7\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+79            <meta-data
+79-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+80                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+80-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+81                android:value="androidx.startup" />
+81-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\mrzak\.gradle\caches\transforms-3\e3d5f7348f31abeaadb43deed4aab633\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+82        </provider>
+83    </application>
+84
+85</manifest>

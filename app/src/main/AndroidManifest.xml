@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.muzilla">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,6 +8,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".App"
@@ -16,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+
         <activity
             android:name=".PlaylistActivity"
             android:exported="true" />
@@ -30,6 +34,15 @@
         <receiver android:name=".PreviousIntent" />
         <receiver android:name=".NextIntent" />
         <receiver android:name=".StopServiceIntent" />
+        <receiver
+            android:name=".PhoneStateBroadcastReceiver"
+            android:permission="android.permission.READ_PHONE_STATE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".PlayerActivity"
             android:exported="true" />
@@ -42,6 +55,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

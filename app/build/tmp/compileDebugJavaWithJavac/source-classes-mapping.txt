@@ -20,8 +20,11 @@ com/example/muzilla/Playlist.java
  com.example.muzilla.Playlist
 com/example/muzilla/IBaseFragment.java
  com.example.muzilla.IBaseFragment
-com/example/muzilla/App.java
- com.example.muzilla.App
+com/example/muzilla/AudioNotificationService.java
+ com.example.muzilla.AudioNotificationService
+ com.example.muzilla.AudioNotificationService$1
+ com.example.muzilla.AudioNotificationService$2
+ com.example.muzilla.AudioNotificationService$AudioBinder
 com/example/muzilla/databinding/FragmentRecommendationBinding.java
  com.example.muzilla.databinding.FragmentRecommendationBinding
 com/example/muzilla/databinding/FragmentPopularBinding.java
@@ -88,24 +91,19 @@ com/example/muzilla/SearchFragment.java
  com.example.muzilla.SearchFragment$1
  com.example.muzilla.SearchFragment$2
  com.example.muzilla.SearchFragment$2$1
-com/example/muzilla/PlaylistActivity.java
- com.example.muzilla.PlaylistActivity
- com.example.muzilla.PlaylistActivity$1
- com.example.muzilla.PlaylistActivity$2
+com/example/muzilla/PlayerActivity.java
+ com.example.muzilla.PlayerActivity
+ com.example.muzilla.PlayerActivity$1
+ com.example.muzilla.PlayerActivity$2
 com/example/muzilla/RecommendationFragment.java
  com.example.muzilla.RecommendationFragment
  com.example.muzilla.RecommendationFragment$1
 com/example/muzilla/PreviousIntent.java
  com.example.muzilla.PreviousIntent
-com/example/muzilla/PlayerActivity.java
- com.example.muzilla.PlayerActivity
- com.example.muzilla.PlayerActivity$1
- com.example.muzilla.PlayerActivity$2
-com/example/muzilla/AudioNotificationService.java
- com.example.muzilla.AudioNotificationService
- com.example.muzilla.AudioNotificationService$1
- com.example.muzilla.AudioNotificationService$2
- com.example.muzilla.AudioNotificationService$AudioBinder
+com/example/muzilla/PlaylistActivity.java
+ com.example.muzilla.PlaylistActivity
+ com.example.muzilla.PlaylistActivity$1
+ com.example.muzilla.PlaylistActivity$2
 com/example/muzilla/MainFragment.java
  com.example.muzilla.MainFragment
  com.example.muzilla.MainFragment$1
@@ -115,3 +113,8 @@ com/example/muzilla/MainFragment.java
  com.example.muzilla.MainFragment$5
  com.example.muzilla.MainFragment$6
  com.example.muzilla.MainFragment$6$1
+com/example/muzilla/App.java
+ com.example.muzilla.App
+ com.example.muzilla.App$1
+com/example/muzilla/PhoneStateBroadcastReceiver.java
+ com.example.muzilla.PhoneStateBroadcastReceiver
