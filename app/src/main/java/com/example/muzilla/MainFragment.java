@@ -37,9 +37,12 @@ public class MainFragment extends Fragment {
     {
         @Override
         public void onAudiosUpdate() {
-            EditText edt = (EditText) getView().findViewById(R.id.myaudio_input);
-            if(edt.getText().length()==0) {
-                UpdateAudio(0);
+            if(getView()!=null)
+            {
+                EditText edt = (EditText) getView().findViewById(R.id.myaudio_input);
+                if (edt.getText().length() == 0) {
+                    UpdateAudio(0);
+                }
             }
         }
     };
@@ -51,12 +54,26 @@ public class MainFragment extends Fragment {
         API.getInstance().getMyPlaylists(playlists,this.profileId,0);
         API.getInstance().addPlaylistListener(tracks);
         API.getInstance().getMyAudio(tracks,0);
+        API.getInstance().addViewUpdater(viewUpdater);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         edt = (EditText) getView().findViewById(R.id.myaudio_input);
+        setSearchControlsBehavior();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setPlaylistViewerBehavior();
+        setTracklistViewerBehavior();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         adapter = new PlaylistAdapter(this.getContext(),playlists.arrayList);
         adapter2 = new TrackAdapter(this.getContext(),tracks.arrayList);
 
@@ -67,13 +84,6 @@ public class MainFragment extends Fragment {
         {
             adapter2.notifyDataSetChanged();
         });
-
-        API.getInstance().addViewUpdater(viewUpdater);
-        setPlaylistViewerBehavior();
-        setTracklistViewerBehavior();
-        setSearchControlsBehavior();
-
-
     }
 
     private void UpdateAudio(int offset)

@@ -13,9 +13,11 @@ import android.util.Log;
 
 public class App extends Application
 {
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         sp = getSharedPreferences("Account", Context.MODE_PRIVATE);
 
         if(!sp.getString("access_token", "").equals("")) {
@@ -58,4 +60,8 @@ public class App extends Application
             return sp;
     }
 
+    public static Context getAppContext()
+    {
+        return context;
+    }
 }

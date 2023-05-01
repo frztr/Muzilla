@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,35 @@ public class API
     private ArrayList<ViewUpdater> updaters = new ArrayList<ViewUpdater>();
     private static API instance;
     private ArrayList<ArrayListExtended<Track>> playlists = new ArrayList<ArrayListExtended<Track>>();
+    private Boolean Connection = true;
+    private Boolean InvalidToken = false;
+
+    public void TokenInvalid()
+    {
+        if(InvalidToken == false)
+        {
+            InvalidToken = true;
+        }
+        else
+        {
+            Toast.makeText(App.getAppContext(), "Неверный токен пользователя", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void ConnectionLoss(boolean printNecessary)
+    {
+        if(!printNecessary)
+        {
+            if (Connection == true) {
+                Connection = false;
+                Toast.makeText(App.getAppContext(), "Отсутствует подключение к Интернету", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else
+        {
+            Toast.makeText(App.getAppContext(), "Отсутствует подключение к Интернету", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private API()
     {
@@ -65,6 +95,100 @@ public class API
             AsyncTaskBody atb = new AsyncTaskBody();
             atb.onSuccessExecute(() ->
             {
+
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(atb.Response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    JSONArray tracklist = null;
+                    try {
+                        tracklist = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("items"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < tracklist.length(); i++) {
+                        try {
+                            String track = "";
+                            if (tracklist.getJSONObject(i).has("album")) {
+                                track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                            }
+                            Track track_item = new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                            track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
+                            track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                            tracks.add(track_item);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    tracks.Update();
+
+            });
+            HttpQuery httpQuery = new HttpQuery(atb);
+            httpQuery.execute("https://api.vk.com/method/audio.get?access_token=" + Token + "&v=5.131&offset=" + offset);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public void getPopularAudio(ArrayListExtended<Track> tracks, @Nullable int offset)
+    {
+        try {
+        AsyncTaskBody atb = new AsyncTaskBody();
+        atb.onSuccessExecute(()->
+        {
+
+                JSONObject response = null;
+                try {
+                    response = new JSONObject(atb.Response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONArray tracklist = null;
+                try {
+                    tracklist = response.getJSONArray("response");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < tracklist.length(); i++) {
+                    try {
+                        String track = "";
+                        if (tracklist.getJSONObject(i).has("album")) {
+                            track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                        }
+                        tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id"))));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                tracks.Update();
+
+        });
+        HttpQuery httpQuery = new HttpQuery(atb);
+        httpQuery.execute("https://api.vk.com/method/audio.getPopular?access_token="+Token+"&v=5.131&offset="+offset);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public void getMyRecommendations(ArrayListExtended<Track> tracks,@Nullable int offset)
+    {
+        try{
+        AsyncTaskBody atb = new AsyncTaskBody();
+        atb.onSuccessExecute(()->
+        {
+
                 JSONObject response = null;
                 try {
                     response = new JSONObject(atb.Response);
@@ -85,107 +209,13 @@ public class API
                         if (tracklist.getJSONObject(i).has("album")) {
                             track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
                         }
-                        Track track_item  = new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")) );
-                        track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
-                        track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
-                        tracks.add(track_item);
-
+                        tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id"))));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+
                 tracks.Update();
-            });
-            HttpQuery httpQuery = new HttpQuery(atb);
-            httpQuery.execute("https://api.vk.com/method/audio.get?access_token=" + Token + "&v=5.131&offset=" + offset);
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    public void getPopularAudio(ArrayListExtended<Track> tracks, @Nullable int offset)
-    {
-        try {
-        AsyncTaskBody atb = new AsyncTaskBody();
-        atb.onSuccessExecute(()->
-        {
-
-            JSONObject response = null;
-            try {
-                response = new JSONObject(atb.Response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONArray tracklist = null;
-            try {
-                tracklist = response.getJSONArray("response");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0;i<tracklist.length();i++)
-            {
-                try {
-                    String track = "";
-                    if(tracklist.getJSONObject(i).has("album"))
-                    {
-                        track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
-                    }
-                    tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")) ));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            tracks.Update();
-        });
-        HttpQuery httpQuery = new HttpQuery(atb);
-        httpQuery.execute("https://api.vk.com/method/audio.getPopular?access_token="+Token+"&v=5.131&offset="+offset);
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    public void getMyRecommendations(ArrayListExtended<Track> tracks,@Nullable int offset)
-    {
-        try{
-        AsyncTaskBody atb = new AsyncTaskBody();
-        atb.onSuccessExecute(()->
-        {
-            JSONObject response = null;
-            try {
-                response = new JSONObject(atb.Response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONArray tracklist = null;
-            try {
-                tracklist = ((JSONArray)((JSONObject) response.get("response")).getJSONArray("items"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0;i<tracklist.length();i++)
-            {
-                try {
-                    String track = "";
-                    if(tracklist.getJSONObject(i).has("album"))
-                    {
-                        track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
-                    }
-                    tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")),((Integer) tracklist.getJSONObject(i).get("owner_id"))));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            tracks.Update();
         });
         HttpQuery httpQuery = new HttpQuery(atb);
         httpQuery.execute("https://api.vk.com/method/audio.getRecommendations?access_token="+Token+"&v=5.131&offset="+offset);
@@ -202,22 +232,23 @@ public class API
         AsyncTaskBody atb = new AsyncTaskBody();
         atb.onSuccessExecute(()->
         {
-            JSONObject response = null;
-            try {
-                response = new JSONObject(atb.Response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-            try {
-                sp.edit().putString("profileId",((JSONObject) response.get("response")).get("id").toString()).apply();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                JSONObject response = null;
+                try {
+                    response = new JSONObject(atb.Response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-            Intent intent = fragmentActivity.getIntent();
-            fragmentActivity.finish();
-            fragmentActivity.startActivity(intent);
+                try {
+                    sp.edit().putString("profileId", ((JSONObject) response.get("response")).get("id").toString()).apply();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent = fragmentActivity.getIntent();
+                fragmentActivity.finish();
+                fragmentActivity.startActivity(intent);
 
         });
         HttpQuery httpQuery = new HttpQuery(atb);
@@ -235,69 +266,65 @@ public class API
         AsyncTaskBody atb = new AsyncTaskBody();
         atb.onSuccessExecute(()->
         {
-            JSONObject response = null;
-            try {
-                response = new JSONObject(atb.Response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-            JSONArray list = null;
-            JSONArray profiles = null;
-            JSONArray groups = null;
-            try {
-                list = ((JSONArray)((JSONObject) response.get("response")).getJSONArray("items"));
-                profiles = ((JSONArray)((JSONObject) response.get("response")).getJSONArray("profiles"));
-                groups = ((JSONArray)((JSONObject) response.get("response")).getJSONArray("groups"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0;i<list.length();i++)
-            {
+                JSONObject response = null;
                 try {
-                    String playlist = "";
-                    if(list.getJSONObject(i).has("photo"))
-                    {
-                        playlist = list.getJSONObject(i).getJSONObject("photo").getString("photo_300");
-                    }
-
-                    String owner = "";
-                    if(!list.getJSONObject(i).has("main_artists"))
-                    {
-                        int playlist_owner_id = list.getJSONObject(i).getJSONObject("original").getInt("owner_id");
-
-                        if (playlist_owner_id > 0) {
-                            for (int j = 0; j < profiles.length(); j++) {
-                                if (profiles.getJSONObject(j).getInt("id") == playlist_owner_id) {
-                                    owner = profiles.getJSONObject(j).getString("first_name") + " " + profiles.getJSONObject(j).getString("last_name");
-                                }
-                            }
-                        } else {
-                            for (int j = 0; j < groups.length(); j++) {
-                                if (groups.getJSONObject(j).getInt("id") == Math.abs(playlist_owner_id)) {
-                                    owner = groups.getJSONObject(j).getString("name");
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-
-                       JSONArray artists = list.getJSONObject(i).getJSONArray("main_artists");
-                       for(int j = 0;j<artists.length();j++)
-                       {
-                         owner += artists.getJSONObject(j).getString("name") +", ";
-                       }
-                       owner = owner.substring(0,owner.length()-2);
-                    }
-
-                    playlists_list.add(new Playlist(playlist, list.getJSONObject(i).get("title").toString(), owner,list.getJSONObject(i).get("owner_id").toString(),list.getJSONObject(i).get("id").toString()));
+                    response = new JSONObject(atb.Response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-            playlists_list.Update();
+
+                JSONArray list = null;
+                JSONArray profiles = null;
+                JSONArray groups = null;
+                try {
+                    list = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("items"));
+                    profiles = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("profiles"));
+                    groups = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("groups"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < list.length(); i++) {
+                    try {
+                        String playlist = "";
+                        if (list.getJSONObject(i).has("photo")) {
+                            playlist = list.getJSONObject(i).getJSONObject("photo").getString("photo_300");
+                        }
+
+                        String owner = "";
+                        if (!list.getJSONObject(i).has("main_artists")) {
+                            int playlist_owner_id = list.getJSONObject(i).getJSONObject("original").getInt("owner_id");
+
+                            if (playlist_owner_id > 0) {
+                                for (int j = 0; j < profiles.length(); j++) {
+                                    if (profiles.getJSONObject(j).getInt("id") == playlist_owner_id) {
+                                        owner = profiles.getJSONObject(j).getString("first_name") + " " + profiles.getJSONObject(j).getString("last_name");
+                                    }
+                                }
+                            } else {
+                                for (int j = 0; j < groups.length(); j++) {
+                                    if (groups.getJSONObject(j).getInt("id") == Math.abs(playlist_owner_id)) {
+                                        owner = groups.getJSONObject(j).getString("name");
+                                    }
+                                }
+                            }
+                        } else {
+
+                            JSONArray artists = list.getJSONObject(i).getJSONArray("main_artists");
+                            for (int j = 0; j < artists.length(); j++) {
+                                owner += artists.getJSONObject(j).getString("name") + ", ";
+                            }
+                            owner = owner.substring(0, owner.length() - 2);
+                        }
+
+                        playlists_list.add(new Playlist(playlist, list.getJSONObject(i).get("title").toString(), owner, list.getJSONObject(i).get("owner_id").toString(), list.getJSONObject(i).get("id").toString()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                playlists_list.Update();
+
         });
         HttpQuery httpQuery = new HttpQuery(atb);
         httpQuery.execute("https://api.vk.com/method/audio.getPlaylists?access_token="+Token+"&v=5.131&owner_id="+owner_id+"&extended=1&count=20&offset="+offset);
@@ -315,34 +342,32 @@ public class API
         atb.onSuccessExecute(()->
         {
 
-            JSONObject response = null;
-            try {
-                response = new JSONObject(atb.Response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONArray tracklist = null;
-            try {
-                tracklist = response.getJSONObject("response").getJSONArray("items");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0;i<tracklist.length();i++)
-            {
+                JSONObject response = null;
                 try {
-                    String track = "";
-                    if(tracklist.getJSONObject(i).has("album"))
-                    {
-                        track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
-                    }
-                    tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")),((Integer) tracklist.getJSONObject(i).get("owner_id"))));
+                    response = new JSONObject(atb.Response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-            tracks.Update();
+
+                JSONArray tracklist = null;
+                try {
+                    tracklist = response.getJSONObject("response").getJSONArray("items");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for (int i = 0; i < tracklist.length(); i++) {
+                    try {
+                        String track = "";
+                        if (tracklist.getJSONObject(i).has("album")) {
+                            track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                        }
+                        tracks.add(new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id"))));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                tracks.Update();
 
         });
         HttpQuery httpQuery = new HttpQuery(atb);
@@ -361,38 +386,37 @@ public class API
             atb.onSuccessExecute(()->
             {
 
-                JSONObject response = null;
-                try {
-                    response = new JSONObject(atb.Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JSONArray tracklist = null;
-                try {
-                    tracklist = response.getJSONObject("response").getJSONArray("items");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                for (int i = 0;i<tracklist.length();i++)
-                {
+                    JSONObject response = null;
                     try {
-                        String track = "";
-                        if(tracklist.getJSONObject(i).has("album"))
-                        {
-                            track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
-                        }
-                        if(((Integer) tracklist.getJSONObject(i).get("owner_id")).equals(profileId)){
-                            Track track_item  = new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")) );
-                            track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
-                            track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
-                            tracks.add(track_item);                        }
+                        response = new JSONObject(atb.Response);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                tracks.Update();
+
+                    JSONArray tracklist = null;
+                    try {
+                        tracklist = response.getJSONObject("response").getJSONArray("items");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < tracklist.length(); i++) {
+                        try {
+                            String track = "";
+                            if (tracklist.getJSONObject(i).has("album")) {
+                                track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                            }
+                            if (((Integer) tracklist.getJSONObject(i).get("owner_id")).equals(profileId)) {
+                                Track track_item = new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                                track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
+                                track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                                tracks.add(track_item);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    tracks.Update();
 
             });
             HttpQuery httpQuery = new HttpQuery(atb);
@@ -411,19 +435,21 @@ public class API
             AsyncTaskBody atb = new AsyncTaskBody();
             atb.onSuccessExecute(()->
             {
-                JSONObject response = null;
-                try {
-                    response = new JSONObject(atb.Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                try {
-                    track.setMusicUrl(response.getJSONArray("response").getJSONObject(0).getString("url"));
-                    track.Loaded();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(atb.Response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        track.setMusicUrl(response.getJSONArray("response").getJSONObject(0).getString("url"));
+                        track.Loaded();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
             });
             HttpQuery httpQuery = new HttpQuery(atb);
             httpQuery.execute("https://api.vk.com/method/audio.getById?access_token="+Token+"&v=5.131&audios="+track.getContentId());
@@ -449,23 +475,24 @@ public class API
             AsyncTaskBody atb = new AsyncTaskBody();
             atb.onSuccessExecute(()->
             {
-                JSONObject response = null;
-                try {
-                    response = new JSONObject(atb.Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                try {
-                    if(response.get("response").getClass()!=JSONObject.class) {
-
-                        track.setLocal_id(response.getString("response"));
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(atb.Response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    track.setLocal_owner(ProfileId);
-                    AudiosUpdate();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+                    try {
+                        if (response.get("response").getClass() != JSONObject.class) {
+
+                            track.setLocal_id(response.getString("response"));
+                        }
+                        track.setLocal_owner(ProfileId);
+                        AudiosUpdate();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
             });
             HttpQuery httpQuery = new HttpQuery(atb);
@@ -500,25 +527,24 @@ public class API
             AsyncTaskBody atb = new AsyncTaskBody();
             atb.onSuccessExecute(()->
             {
-                JSONObject response = null;
-                try {
-                    response = new JSONObject(atb.Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                for (ArrayListExtended<Track> playlist: playlists)
-                {
-                    for (Track track_item:playlist.arrayList)
-                    {
-                        if(track.getLocal_id().equals(track_item.getLocal_id()))
-                        {
-                            track_item.setLocal_owner(null);
-                        }
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(atb.Response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                     playlist.Update();
-                }
-                AudiosUpdate();
+
+                    for (ArrayListExtended<Track> playlist : playlists) {
+                        for (Track track_item : playlist.arrayList) {
+                            if (track.getLocal_id().equals(track_item.getLocal_id())) {
+                                track_item.setLocal_owner(null);
+                            }
+                        }
+                        playlist.Update();
+                    }
+                    AudiosUpdate();
+
             });
             HttpQuery httpQuery = new HttpQuery(atb);
             httpQuery.execute("https://api.vk.com/method/audio.delete?access_token="+Token+"&v=5.131&audio_id="+track.getLocal_id()+"&owner_id="+track.getLocal_owner());
@@ -535,39 +561,43 @@ public class API
             AsyncTaskBody atb = new AsyncTaskBody();
             atb.onSuccessExecute(() ->
             {
-                JSONObject response = null;
-                try {
-                    response = new JSONObject(atb.Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                JSONArray tracklist = null;
-                try {
-                    tracklist = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("items"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                for (int i = 0; i < tracklist.length(); i++) {
-                    try {
-                        String track = "";
-                        if (tracklist.getJSONObject(i).has("album")) {
-                            track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                        JSONObject response = null;
+                        try {
+                            response = new JSONObject(atb.Response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        Track track_item  = new Track(tracklist.getJSONObject(i).get("id").toString(),tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"),track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")) );
-                        track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
-                        track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
-                        tracks.add(track_item);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                tracks.Update();
+                        JSONArray tracklist = null;
+                        try {
+                            tracklist = ((JSONArray) ((JSONObject) response.get("response")).getJSONArray("items"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        for (int i = 0; i < tracklist.length(); i++) {
+                            try {
+                                String track = "";
+                                if (tracklist.getJSONObject(i).has("album")) {
+                                    track = tracklist.getJSONObject(i).getJSONObject("album").getJSONObject("thumb").getString("photo_300");
+                                }
+                                Track track_item = new Track(tracklist.getJSONObject(i).get("id").toString(), tracklist.getJSONObject(i).getJSONObject("ads").getString("content_id"), track, tracklist.getJSONObject(i).get("title").toString(), tracklist.getJSONObject(i).get("artist").toString(), ((Integer) tracklist.getJSONObject(i).get("duration")), ((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                                track_item.setLocal_id(tracklist.getJSONObject(i).get("id").toString());
+                                track_item.setLocal_owner(((Integer) tracklist.getJSONObject(i).get("owner_id")));
+                                tracks.add(track_item);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        tracks.Update();
+
             });
             HttpQuery httpQuery = new HttpQuery(atb);
             httpQuery.execute("https://api.vk.com/method/audio.get?access_token=" + Token + "&v=5.131&offset=" + offset+"&owner_id="+owner_id+"&playlist_id="+id);
+
         }
         catch (Exception ex)
         {

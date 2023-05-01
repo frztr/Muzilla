@@ -64,6 +64,14 @@ public class PlayerActivity extends AppCompatActivity {
         public void onAudiosUpdate() {
             MyAudiosUpdate();
         }
+
+        @Override
+        public void onCurrentTrackStateChanged() {
+            if(AudioPlayer.getInstance().getCurrentTrack()==null)
+            {
+                onBackPressed();
+            }
+        }
     };
 
     @Override
@@ -161,7 +169,10 @@ public class PlayerActivity extends AppCompatActivity {
         }
         else
         {
-            AudioPlayer.getInstance().Play();
+            if(AudioPlayer.getInstance().getCurrentTrack()!=null)
+            {
+                AudioPlayer.getInstance().Play();
+            }
         }
     }
 

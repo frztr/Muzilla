@@ -25,11 +25,16 @@ public class PlaylistActivity extends AppCompatActivity implements IPlayerActivi
     private TrackAdapter adapter ;
     Track last_track = null;
 
+    public PlaylistActivity()
+    {
+        API.getInstance().addPlaylistListener(tracks);
+        AudioPlayer.getInstance().addUpdater(viewUpdater);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
-        API.getInstance().addPlaylistListener(tracks);
         API.getInstance().getPlaylistAudio(getIntent().getStringExtra("owner_id"),getIntent().getStringExtra("playlist_id"), tracks,0);
         adapter = new TrackAdapter(this,tracks.arrayList);
         tracks.addListener(()->
@@ -38,6 +43,7 @@ public class PlaylistActivity extends AppCompatActivity implements IPlayerActivi
         });
         FullScreen();
         LoadWallpaper();
+        LoadPlaylist();
     }
 
     public ViewUpdater viewUpdater = new ViewUpdater()
@@ -70,10 +76,8 @@ public class PlaylistActivity extends AppCompatActivity implements IPlayerActivi
         }
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
+
+
 
     private void LoadWallpaper()
     {
@@ -102,10 +106,8 @@ public class PlaylistActivity extends AppCompatActivity implements IPlayerActivi
         v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        overridePendingTransition(R.anim.slide_in_up,R.anim.stay);
+    private void LoadPlaylistInfo()
+    {
         if (getIntent().getStringExtra("playlist_img")  != "") {
             Picasso.get().load(getIntent().getStringExtra("playlist_img")).into((ImageView) findViewById(R.id.playlist_img_iv));
         } else {
@@ -134,9 +136,14 @@ public class PlaylistActivity extends AppCompatActivity implements IPlayerActivi
         {
             ToggleButton(AudioPlayer.getInstance().getShuffle(),findViewById(R.id.shuffle_playlist));
         }
+    }
 
-        AudioPlayer.getInstance().addUpdater(viewUpdater);
-        LoadPlaylist();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.slide_in_up,R.anim.stay);
+        LoadPlaylistInfo();
+
     }
 
     public void Close(View view)

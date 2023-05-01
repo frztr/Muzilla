@@ -2,8 +2,12 @@ package com.example.muzilla;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,8 +82,51 @@ public class HttpQuery extends AsyncTask<String,Void,String> {
     }
 
     protected void onPostExecute(String result) {
-       // Log.e("Console", result + "" );
+        Log.e("Console", result + "" );
         atb.Response = result;
-        atb.onSuccessExecute.run();
+        if(atb.Response!=null)
+        {
+            JSONObject response = null;
+            try {
+                response = new JSONObject(atb.Response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            if(!response.has("error"))
+            {
+                   if(atb.onSuccessExecute!=null)
+                   {
+                        atb.onSuccessExecute.run();
+                   }
+            }
+            else
+            {
+                try
+                {
+                    ErrorEvent(Integer.parseInt(((JSONObject)response.get("error")).get("error_code").toString()));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else
+        {
+            API.getInstance().ConnectionLoss(false);
+        }
+    }
+
+    private void ErrorEvent(int i)
+    {
+        switch (i)
+        {
+            case 5:
+                API.getInstance().TokenInvalid();
+                break;
+            default:
+                break;
+        }
     }
 }
+
