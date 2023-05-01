@@ -80,11 +80,14 @@ com/example/muzilla/databinding/ActivityPlayerBinding.java
  com.example.muzilla.databinding.ActivityPlayerBinding
 com/example/muzilla/API.java
  com.example.muzilla.API
-com/example/muzilla/AudioNotificationService.java
- com.example.muzilla.AudioNotificationService
- com.example.muzilla.AudioNotificationService$1
- com.example.muzilla.AudioNotificationService$2
- com.example.muzilla.AudioNotificationService$AudioBinder
+com/example/muzilla/MainActivity.java
+ com.example.muzilla.MainActivity
+ com.example.muzilla.MainActivity$1
+ com.example.muzilla.MainActivity$2
+ com.example.muzilla.MainActivity$3
+ com.example.muzilla.MainActivity$4
+ com.example.muzilla.MainActivity$5
+ com.example.muzilla.MainActivity$6
 com/example/muzilla/PhoneStateBroadcastReceiver.java
  com.example.muzilla.PhoneStateBroadcastReceiver
 com/example/muzilla/Track.java
@@ -101,14 +104,11 @@ com/example/muzilla/HttpQuery.java
  com.example.muzilla.HttpQuery
 com/example/muzilla/IBaseFragment.java
  com.example.muzilla.IBaseFragment
-com/example/muzilla/MainActivity.java
- com.example.muzilla.MainActivity
- com.example.muzilla.MainActivity$1
- com.example.muzilla.MainActivity$2
- com.example.muzilla.MainActivity$3
- com.example.muzilla.MainActivity$4
- com.example.muzilla.MainActivity$5
- com.example.muzilla.MainActivity$6
+com/example/muzilla/AudioNotificationService.java
+ com.example.muzilla.AudioNotificationService
+ com.example.muzilla.AudioNotificationService$1
+ com.example.muzilla.AudioNotificationService$2
+ com.example.muzilla.AudioNotificationService$AudioBinder
 com/example/muzilla/MainFragment.java
  com.example.muzilla.MainFragment
  com.example.muzilla.MainFragment$1
